@@ -44,11 +44,15 @@ test : 创建次文档项目的项目名称
 * Sphinx项目的配置文件
 
 执行以上创建命令后会在当前目录下创建test目录及以下目录
+
 配置文件为conf.py
+
 比如配置中文:
 language = 'zh_CN'
+
 激活sphinx扩展插件配置
 extensions = ['sphinx.ext.pngmath', 'sphinx.ext.todo', 'sphinx.ext.autodoc',]
+
 todo_include_todos = True
 
 4. reStructuredText常用基本语法
