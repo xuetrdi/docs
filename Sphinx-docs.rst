@@ -28,11 +28,17 @@ Sphinx使用入门
 切换目录到你想到创建项目的目录下,执行
 sphinx-quickstart -q -p Test -a xuetr_di -v 1.0 test
 参数含义:
+
 Test : 开发项目的项目名称
+
 -p   : 要为那个项目创建文档项目(devlop project Test)
+
 -a   : 作者
+
 -v   : 版本
+
 test : 创建次文档项目的项目名称
+
 [注] 具体参数可以查询文档 sphinx-quickstart --help
 
 * Sphinx项目的配置文件
