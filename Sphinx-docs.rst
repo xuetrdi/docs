@@ -12,7 +12,7 @@ Sphinx使用入门
 1. Sphinx介绍
 ------
   Sphinx是一块文档编辑工具,编辑纯文本文档.官方网站http://sphinx-doc.org.
-  Sphinx是用Python编写的工具,用来构建多个以reStructuredText语法编写的文本文件,将它们转换为HTML或者PDF等格式.Sphinx可以将树的各个元素
+  Sphinx是用Python编写的工具,用来构建多个以reStructuredText语法编写的文本文件,将它们转换为HTML或者PDF等格式,Sphinx可以将树的各个元素
 分割成多个文件进行管理.
   Sphinx捆绑了Tex排版系统等扩展,另外也支持单独安装第三方开发的扩展.这些扩展包括流程图,序列图,等图标的植入扩展,UML画图,乐谱绘图,HTML模版变更.
 也可以自己开发扩展插件.
