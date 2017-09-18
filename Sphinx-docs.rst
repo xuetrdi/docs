@@ -22,7 +22,7 @@ Sphinx使用入门
 
 3. Sphinx文档项目创建及配置说明
 ------
-+ 创建Sphinx项目
+* 创建Sphinx项目
 切换目录到你想到创建项目的目录下,执行
 sphinx-quickstart -q -p Test -a xuetr_di -v 1.0 test
 参数含义:
@@ -32,7 +32,7 @@ Test : 开发项目的项目名称
 -v   : 版本
 test : 创建次文档项目的项目名称
 [注] 具体参数可以查询文档 sphinx-quickstart --help
-+ Sphinx项目的配置文件
+* Sphinx项目的配置文件
 执行以上创建命令后会在当前目录下创建test目录及以下目录
 配置文件为conf.py
 比如配置中文:
