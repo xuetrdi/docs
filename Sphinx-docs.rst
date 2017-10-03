@@ -57,13 +57,13 @@ todo_include_todos = True
 
 4. reStructuredText常用基本语法
 --------
-Struct::
+literal Blocks::
 
 reStructedtext文档指令的用法结构
-|.. 指令::参数
-|   :选项:
-|
-|文档内容
+.. 指令::参数
+   :选项:
+
+文档内容
 
 + 目录树指令toctree指令
 + 单个文档结构
