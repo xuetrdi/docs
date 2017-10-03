@@ -59,9 +59,9 @@ todo_include_todos = True
 --------
 reStructedtext文档指令的用法结构::
 
-.. 指令::参数
-   :选项:
-
+\.\. 指令\:\:参数
+   \:选项\:
+空行
 文档内容
 
 + 目录树指令toctree指令
