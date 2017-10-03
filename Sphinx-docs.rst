@@ -57,6 +57,35 @@ todo_include_todos = True
 
 4. reStructuredText常用基本语法
 --------
+reStructedtext文档指令的用法结构
+|.. 指令::参数
+|   :选项:
+|
+|文档内容
+
++ 目录树指令toctree指令
++ 单个文档结构
+  
+  - 标题
+  - 段落
+  - 无序列表:可以使用+，-，\*中任意一个表示一个无序列表的一行这个三个字符和内容之间需要有一个空格
+  - 有序列表:使用数字，字符,罗马数字等后跟点，然后空格，然后是内容
+  - 字段列表:如
+  
+  :Authors: xuetrdi,
+  :version: 1.0
+  :Dedication: docs
+  
+  - 命令选项列表:快速构建命令行参数文档
+  - 引用块，如下：
+  
+  content below is literal Blocks::
+  
+  > this is context
+  
+  - 表格
+  - 水平线
+  
 
 5. Sphinx文档结构化三阶段
 --------
