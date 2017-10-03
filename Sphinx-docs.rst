@@ -57,9 +57,8 @@ todo_include_todos = True
 
 4. reStructuredText常用基本语法
 --------
-literal Blocks::
+reStructedtext文档指令的用法结构::
 
-reStructedtext文档指令的用法结构
 .. 指令::参数
    :选项:
 
