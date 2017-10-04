@@ -108,17 +108,19 @@ Sphinx能将所有文档文件组合到一个树结构中,这样,所有文件都
 
 组织文档结构
 -------------
-* 跳转式
-
-  * toctree指令
-  
-  reStructedtext文档指令的用法结构::
+* reStructedtext文档指令的用法结构::
 
 + 指令
 + 参数
 + 选项
 + 空行
 + 内容
+
+* 跳转式
+
+  * toctree指令
+  
+
 
 其中执行是双点号空格开头，然后是指令，然后是双冒号，双冒号后面可以跟参数，参数下面是选项，选项用冒号包裹，前面的冒号需要跟指令对齐，后面的冒号后面是选项的值，然后是空行，再然后是具体的内容，如下
 
@@ -133,19 +135,22 @@ Sphinx能将所有文档文件组合到一个树结构中,这样,所有文件都
 [注]其中前言，第一章，第章这些对应的位置和文件。使用sphinx-quickstart生成project后，会在项目文档下的source目录下生成index.rst文件，现在我们在与index.rst同一目录下创建pre.rst,first.rst,second.rst,然后就会形成内部链接，make html后在index.rst,pre.rst,first.rst,second.rst都会生成对应的html文件，在index.html，显示pre.rst,first.rst,second.rst中的Header部分，比如分别:
 
 pre.rst
-=========
+
+\=========
 前言
-=========
+\=========
 
 first.rst
-=========
+
+\=========
 第一章
-=========
+\=========
 
 second.rst
-=========
+
+\=========
 第二章
-=========
+\=========
 
 在在index.html中就会显示出
 目录：
