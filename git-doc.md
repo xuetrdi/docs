@@ -105,3 +105,38 @@
   - 远程指针指向的分支不可编辑,但可以合并到当前分支,跟踪远程分支
   - 删除远程分支,git push 远程名 :分支名
 + 衍合rabase
+
+---------------
+## 在常用编辑器上集成Git环境
+
++ 在Emacs/Spacemacs上集成Git
++ 在Sublime上集成Git
+
+1. 在Emacs/Spacemacs上集成Git以及使用
+2. 在Sublime上集成Git以及使用
+
+
+---------------
+## 使用场景举例
++ 推送本地仓库到github服务器上失败
++ 如何合并github上的两个分支
+
+1. 推送本地仓库到github服务器上失败
+
++ Permission denied (publickey).fatal the remote hang up unexpectly解决办法
+  1. 本地生成公钥私钥对()
+  2. 复制公钥内容，创建github公钥，粘贴公钥内容
+  3. 设置全局环境变量user.name,user.email(git config --global user.name "xx"),这里的设置会被保存在～/.gitconfig文件里面，也可以 直接在这个文件里面编辑
++ ssh: Could not resolve hostname github.com: Name or service not known.fatal: Could not read from remote repository解决方法
+  - 说明:这种情况就是git remote add成功，但是就是push不成功
+  1. ping github.com获取一个github的服务器ip地址,或者创建秘钥后测试ssh -T git@github.com里面返回的ip地址，或者网上搜一下，一般就那么几个
+  2. 如果是Linux在/etc/hosts增加你找到的ip然后配置github.com,如果是Windows找到C盘中存放hosts文件的方法同样的编辑方法，保存
+  3. 重新推送(git push -u origin master)，第一次推送带-u参数，以后不需要
+
+2. 如何合并github上的两个分支？
+
+- 首先，把github远程仓库克隆到本地，并查看分支(git branch -a)，看是否有各个分支
+- 其次，如果没有切换到被合并的分支查看(git checkout branch-name)，切换后会创建远程分支对应的本地分支
+- 再次，回到本地主分支(git checkout master)
+- 再次，合并本地分支到本地主分支上，如果有冲突，修改冲突文件，再次提交，直至成功
+- 最后，推送合并后的分支到github远程仓库(git push -u origin master),首次推送加-u，其余不用加
