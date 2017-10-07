@@ -19,10 +19,10 @@
 5. 测试用例，测试点，测试工具
 
 --------------------------------
-## 文档目录
+## 文档目录:
 
 1. Sphinx Python文档系统.
 2. Git Workflow日常用法
 3. Spacemacs集成ipython-notebook编程环境
-4. Python流畅的Python读书笔记
+4. 流畅的Python读书笔记
 
