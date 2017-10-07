@@ -25,5 +25,10 @@
 1. [Sphinx Python文档系统](./Sphinx-docs.rst).
 2. [Git Workflow日常用法](./git-doc.md)
 3. [Spacemacs集成ipython-notebook编程环境](./Spacemacs-notebook.md)
-4. [流畅的Python读书笔记]()
+4. [流畅的Python-读书笔记]()
+5. [Vagrant搭建开发环境]()
+6. [七周七语言-读书笔记]()
+7. [七周七并发模型-读书笔记]()
+8. [Python数据分析基础:Numpy-读书笔记]()
+9. [Python计算机视觉编程-读书笔记]()
 
