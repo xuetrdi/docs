@@ -74,7 +74,8 @@ c.NotebookApp.password = "sha1:83c7dddb4465:46739089b03d417962d4a14246a28efa584b
 
 这个可以看github上的spacemacs ipython-notebook layer
 具体如下：
-在你的～/.spacemacs或者~/.spacemacs.d/init.el中 dotspacemacs-configuration-layers中增加ipython-notebook，保存退出。重启spacemacs
+在你的～/.spacemacs或者~/.spacemacs.d/init.el中 dotspacemacs-configuration-layers中增加ipython-notebook，保存退出。重启spacemacs.
+如果是Emacs依赖的插件是ein插件，安装方法M-x package-install,RET, ein,RET
 
 以上是所需环境。
 
@@ -93,3 +94,7 @@ M-x notebook-login RET
 3.在Spacemacs中输入快捷键，SPC a i n，RET，默认8888端口,回车就可以登录成功了
 
 4.如果在Emacs中，第三步为M-x，然后输入ein:notebooklist-open，RET，看到端口RET就成功了
+
+## 推荐教程
+
+关于Spacemacs的教程，子龙闪人的[Spacemacs教程](https://github.com/emacs-china/Spacemacs-rocks)
