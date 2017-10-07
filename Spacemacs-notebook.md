@@ -1,4 +1,12 @@
 # Emacs/Spacemacs 中编写notebook
+--要点如下:--
+
+- 操作环境
+- 依赖系统环境
+- 依赖Python环境
+- 设置jupyter
+- 在Spacemacs中安装notebook layer
+- 使用Spacemacs中的note-book
 
 ## 搭建环境
 
