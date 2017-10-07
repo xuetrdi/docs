@@ -22,8 +22,8 @@
 --------------------------------
 ## 文档目录:
 
-1. Sphinx Python文档系统.
-2. Git Workflow日常用法
-3. Spacemacs集成ipython-notebook编程环境
-4. 流畅的Python读书笔记
+1. [Sphinx Python文档系统](./Sphinx-docs.rst).
+2. [Git Workflow日常用法](./git-doc.md)
+3. [Spacemacs集成ipython-notebook编程环境](./Spacemacs-notebook.md)
+4. [流畅的Python读书笔记]()
 
