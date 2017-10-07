@@ -80,6 +80,8 @@ jupyter notebook
 
 M-x notebook-login RET
 
-提示密码输入，然后输入上面设置的密码，RET后会提示已经登录使用ein:notebooklist-open
+提示密码输入，然后输入上面设置的密码，RET后会提示已经登录使用
 
-3.在Spacemacs中输入快捷键，SPC a i n，RET，默认8888端口就可以登录成功了
+3.在Spacemacs中输入快捷键，SPC a i n，RET，默认8888端口,回车就可以登录成功了
+
+4.如果在Emacs中，第三步为M-x，然后输入ein:notebooklist-open，RET，看到端口RET就成功了
