@@ -29,6 +29,7 @@
 4. [Python之生成器与协程的不同](./generator-protocol.md)
 5. [Python并发编程之concurrent-futures多进程与多线程](./concurrent-futures.md)
 6. [Python并发编程之asyncio事件循环驱动的协程实现并发](./asyncio.md)
+7. [面向对象类与类之间的关系以及相关的设计模式原理](./oop.md)
 5. [Vagrant搭建开发环境]()
 6. [七周七语言-读书笔记]()
 7. [七周七并发模型-读书笔记]()
