@@ -30,9 +30,3 @@
 5. [Python并发编程之concurrent-futures多进程与多线程](./concurrent-futures.md)
 6. [Python并发编程之asyncio事件循环驱动的协程实现并发](./asyncio.md)
 7. [面向对象类与类之间的关系以及相关的设计模式原理](./oop.md)
-5. [Vagrant搭建开发环境]()
-6. [七周七语言-读书笔记]()
-7. [七周七并发模型-读书笔记]()
-8. [Python数据分析基础:Numpy-读书笔记]()
-9. [Python计算机视觉编程-读书笔记]()
-
