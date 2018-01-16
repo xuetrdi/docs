@@ -7,10 +7,10 @@
 
 2. 设置字符集
 
-   ```shell
+```shell
    su root
    echo LANG="en_GB.utf8"
-   ```
+```
 
 3. Python 安装配置
 
