@@ -19,6 +19,8 @@ Mac 下的go get 步骤:
 
 3. 设置go 代理
 
-   - alias go='https_proxy=127.0.0.1:8118 go'
+   .. code-block:: shell
+    
+        $ alias go='https_proxy=127.0.0.1:8118 go'
 
 4. 执行go get 命令就可以正常了。
