@@ -62,7 +62,7 @@ python3 -c "from notebook.auth import passwd;print(passwd())"
 然后输入你想设置的一个密码，这个密码用于后面登录用，一定要记得
 复制
 ```
-sha1:fe4a5785aa9b:d11adbaaf789fa560e8b637d69cdd0f386ce4712```
+sha1:fe4a5785aa9b:d11adbaaf789fa560e8b637d69cdd0f386ce4712
 ```
 
 ```
