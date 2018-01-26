@@ -14,14 +14,14 @@ Mac 下的go get 步骤:
    .. code-block:: shell
     
         $ vim /usr/local/etc/privoxy/config
-        
+
    - 末尾追加内容如下:: 
    
        listen-address 0.0.0.0:8118
 
        forward-socks5 / 127.0.0.1:1080 .
 
-       [注意] 最后的那个点。
+       # [注意] 最后的那个点。
          
    - 启动: 
    .. code-block:: shell
