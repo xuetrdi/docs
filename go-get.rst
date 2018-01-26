@@ -6,8 +6,8 @@ Mac 下的go get 步骤:
 2. 安装配置启动privoxy
 
    - 安装: brew install privoxy
-   - 配置: vim /usr/local/etc/privoxy/config, 在末尾增加
-   - 增加内容如下:: 
+   - 配置: vim /usr/local/etc/privoxy/config
+   - 末尾追加内容如下:: 
    
        listen-address 0.0.0.0:8118
 
