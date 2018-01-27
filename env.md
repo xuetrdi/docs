@@ -74,7 +74,7 @@ sudo yum -y install vim
 
 配置vim(~/.vimrc)
 
-```
+```shell
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
