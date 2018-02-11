@@ -9,6 +9,7 @@ Mac \+ Xcode 的OpenCV环境搭建
 1. 安装 OpenCV
    
    使用brew工具安装OpenCV,默认已经安装了brew，如果没有安装参考网上的教程，很容易安装好。
+   
    .. code-block:: shell
    
        brew install opencv 
