@@ -14,3 +14,4 @@
 7. [面向对象类与类之间的关系以及相关的设计模式原理](./oop.md)
 8. [CentOS开发环境搭建](./env.md)
 9. [Mac 下go get配置](./go-get.rst)
+10. [使用CMake构建C/C++工程](./cmake.rst)
