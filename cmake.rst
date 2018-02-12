@@ -42,6 +42,7 @@ CMake怎么来管理项目
 3. 多个目录(根目录下有子目录)，多个源文件
    
    根目录的CMakeLists.txt文件
+
    .. code-block:: CMake
        
        # 需要的CMake的版本
@@ -58,6 +59,7 @@ CMake怎么来管理项目
        target_link_libraries(ExecuteFileName sub1)
     
     子目录的CMakeLists.txt文件
+
     .. code-block:: CMake
        
        # 查找当前目录下所有源文件,并保存到变量DIR_LIB_SRCS变量
@@ -68,6 +70,7 @@ CMake怎么来管理项目
 4. 根据条件条件宏是否链接sub1库,并且生成对应的头文件
 
    根目录的CMakeLists文件
+
    .. code-block:: CMake
        
        # 需要的CMake的版本
@@ -94,6 +97,7 @@ CMake怎么来管理项目
        target_link_libraries(ExecuteFileName ${EXTRA_LIBS})
 
    编写config.h.in文件
+
    .. code-block:: CMake
        
        #cmakedefine USE_MYMATH
@@ -101,6 +105,7 @@ CMake怎么来管理项目
 5. 程序安装
 
    子目录的CMakeLists.txt文件
+
     .. code-block:: CMake
        
        # 查找当前目录下所有源文件,并保存到变量DIR_LIB_SRCS变量
@@ -112,6 +117,7 @@ CMake怎么来管理项目
        install(FILES "${PROJECT_BINARY_DIR}/config.h" DESTINATION include)
    
    根目录的CMakeLists文件
+
    .. code-block:: CMake
        
        # 需要的CMake的版本
@@ -143,6 +149,7 @@ CMake怎么来管理项目
 6. 为程序添加测试
 
    根目录的CMakeLists文件
+   
    .. code-block:: CMake
        
        # 需要的CMake的版本
