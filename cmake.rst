@@ -109,7 +109,7 @@ CMake怎么来管理项目
 
    子目录的CMakeLists.txt文件
 
-    .. code-block:: CMake
+   .. code-block:: CMake
        
        # 查找当前目录下所有源文件,并保存到变量DIR_LIB_SRCS变量
        aux_source_directory(. DIR_LIB_SRCS)
@@ -118,7 +118,7 @@ CMake怎么来管理项目
        # 指定安装路径
        install(TARGETS ExecuteFileName DESTINATION bin)
        install(FILES "${PROJECT_BINARY_DIR}/config.h" DESTINATION include)
-   
+
    根目录的CMakeLists文件
 
    .. code-block:: CMake
