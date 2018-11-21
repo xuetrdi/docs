@@ -41,6 +41,11 @@ Clang Complete
 ----------
 
 如果SPC h d v,输入 company-clang-arguments,如果显示为nil 增加syntax-checking layer,如果显示项目根目录下的.clang_complete文件中的内容则正确。
-`(syntax-checking :variables syntax-checking-enable-by-default nil)`
+
+.. code-block:: elisp
+    
+    ;; add syntax-checking layer
+    (syntax-checking :variables syntax-checking-enable-by-default nil)
+
 
 如果在头文件下面出现红线在 .clang_complete文件中增加`-Wno-unused-parameter`到最后一行
