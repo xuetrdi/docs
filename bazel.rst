@@ -221,3 +221,17 @@ fdo_profile
       proto_profile = label,      # protobuf profile label
     )
 
+bzl文件
+=======
+
+bzl文件使用Starlark语言编写，包括BUILD文件
+
+语法类似Python,但没有Python的强大功能。简单，小，线程安全。
+
+核心构建语法包括：函数，if语句，for循环。
+
+支持类型：None,bool,dict,function,int,list,string,bazel两个特定类型：depset,struct.
+
+导入外部文件使用load,而不能使用import;定义对象使用struct,而不能使用class
+
+在Starlark中list和dict是不可变的。不能动态变化。
