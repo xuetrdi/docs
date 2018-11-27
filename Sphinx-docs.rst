@@ -11,18 +11,22 @@ Sphinx使用入门
 -----------------------------
 
 1. Sphinx介绍
-------
+-------------
+
   Sphinx是一块文档编辑工具,编辑纯文本文档.官方网站http://sphinx-doc.org.
   Sphinx是用Python编写的工具,用来构建多个以reStructuredText语法编写的文本文件,将它们转换为HTML或者PDF等格式,Sphinx可以将树的各个元素分割成多个文件进行管理.
   Sphinx捆绑了Tex排版系统等扩展,另外也支持单独安装第三方开发的扩展.这些扩展包括流程图,序列图,等图标的植入扩展,UML画图,乐谱绘图,HTML模版变更.
 也可以自己开发扩展插件.
 
 2. Sphinx安装
-------
-pip install sphinx
+-------------
+
+.. code-block:: shell
+
+    pip install sphinx
 
 3. Sphinx文档项目创建及配置说明
-------
+-------------------------------
 
 * 创建Sphinx项目
 
@@ -57,7 +61,8 @@ extensions = ['sphinx.ext.pngmath', 'sphinx.ext.todo', 'sphinx.ext.autodoc',]
 todo_include_todos = True
 
 4. reStructuredText常用基本语法
---------
+-------------------------------
+
 + 目录树指令toctree指令
 + 单个文档结构
   
@@ -83,7 +88,8 @@ todo_include_todos = True
   
 
 5. Sphinx文档结构化三阶段
---------
+-------------------------
+
 * 单个文档结构
 
 * 多个文件目录结构
@@ -107,7 +113,8 @@ Sphinx能将所有文档文件组合到一个树结构中,这样,所有文件都
 还可以用:doc:`../sub/index`这样的形式指定引用页的相对路径,在Sphinx在make时会自动将该页面的标题和链接填充到这里.
 
 组织文档结构
--------------
+------------
+
 * reStructedtext文档指令的用法结构::
 
 + 指令
@@ -178,7 +185,8 @@ include指令，如.. include:: 第一章.rst
 嵌套就是不会跳转，会把第一章.rst直接嵌套显示在index.html中
 
 Sphinx自动化生成Python文档
-------------------------------
+--------------------------
+
 * 生成的文档必要条件：
 
 1. 在conf.py中有autodoc的扩展

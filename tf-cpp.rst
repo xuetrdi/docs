@@ -214,9 +214,7 @@ C++ TensorFlow
 检验结果
 """"""""
 
-已通过检验
-
-基于C++构建TensorFlow Lite应用
+已通过检验基于C++构建TensorFlow Lite应用
 ------------------------------
 
 环境准备
