@@ -82,7 +82,7 @@ C++ TensorFlow
           -D WITH_V4L=ON \
           -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
           -D BUILD_EXAMPLES=ON ..
-    make -j4
+    make -j8
     sudo make install 
 
 配置OpenCV的opencv.pc的文件的pkgconfig文件。配置编译器编译的头文件，以及链接的动态库。

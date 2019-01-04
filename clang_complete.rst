@@ -49,3 +49,17 @@ Clang Complete
 
 
 如果在头文件下面出现红线在 .clang_complete文件中增加`-Wno-unused-parameter`到最后一行
+
+
+\.clang_complete文件中的选项参数
+--------------------------------
+
+其中的参数是Clang编译器的选项参数，可以在Terminal执行
+
+.. code-block:: shell
+
+    clang --help
+
+查看具体参数的含义。
+比如-D：表示宏或者值，例如-DDEBUG，开启debug宏
+比如-I：表示导入的头文件目录，例如-I/usr/local/include
