@@ -1,0 +1,33 @@
+#+TITLE: Eigen3 Array
+
+** What is the Array class
+   Array 是Eigen的一个模版类,与Matrix类相同,前三个参数是必须的。
+   
+** Accessing values inside an Array
+#+BEGIN_SRC cpp
+  #include <Eigen/Dense>
+  using namespace Eigen;
+  int main()
+  {
+    ArrayXXf m(2, 2);
+    m(0,0) = 1.0; m(0,1) = 2.0;
+    m(1,0) = 3.0; m(1,1) = m(0,1) + m(1,0);
+    std::cout << m << std::endl << std::endl;
+    m << 1.0, 2.0,
+         3.0, 4.0;
+    std::cout << m << std::endl;
+  }
+#+END_SRC
+
+** Addition and subtraction
+   - array + scalar
+** Array multiplication
+   - scalar * array, 与matrix相同
+   - array * array: 系数乘积
+** Other coefficient-wise operations
+   - abs()
+   - sqrt()
+   - min()
+** Converting between array and matrix expressions
+   - m.array()
+   - a.matrix()

@@ -1,0 +1,36 @@
+* Matrix and vector arithmetic
+** Addition and subtraction
+   条件:
+   - 相同维度
+   - 相同类型(Eigen不进行自动类型提升)
+   计算含义:
+   - 相同位置的系数相加或者相减
+   计算方式:
+   - 重载了*+*和*-*运算符
+** Scalar multiplication and division
+   matrices或vectors的每一个系数都乘以或者除以scalar
+   
+** Transposition and conjugation
+   - 矩阵转置: m.transpose()
+   - 共轭矩阵: m.conjugate()
+   - 伴随矩阵: m.adjoint()
+   
+   对于实数矩阵，共轭矩阵等于原矩阵，伴随矩阵等于转置矩阵
+   另外是in place操作函数
+** Matrix-matrix and matrix-vector multiplication
+   matrix-matrix:
+   - 对应系数相乘
+   matrix-vector:
+   - 广播后对应系数相乘
+   
+** Dot product and cross product
+   矩阵內积(inner product): dot product
+   矩阵外积(outer product): cross product
+** Basic arithmetic reduction operations(基本约简操作)
+   约简操作:
+   - 求矩阵所有系数之和: m.sum()
+   - 求矩阵所有系数之积: m.prod()
+   - 求矩阵中最大的系数: m.maxCoeff()
+   - 求矩阵中最小的系数: m.minCoeff()
+   - 求矩阵中对角线之和: m.trace()
+   - 求矩阵所有系数均值: m.mean()

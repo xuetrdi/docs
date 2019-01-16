@@ -1,0 +1,24 @@
+* Block operations(切片)
+
+** Using block operations
+   块size(p,q), 起始(i,j)的两种表达方式:
+   - matrix.block(i,j,p,q)
+   - matrix.block<p,q>(i,j)
+   - as a rvalue(右值): 获取块的值
+   - as a lvalue(左值): 可以赋值给块
+   - array.block(i,j,p,q)
+   - 如果块是单个列: col(i)
+   - 如果块是单个行: row(i)
+** Corner-related operations
+   - 左上角: matrix.topLeftCorner(p,q)
+   - 左下角: matrix.bottomLeftCorner(p,q)
+   - 右上角: matrix.topRightCorner(p,q)
+   - 右下角: matrix.bottomRightCorner(p,q)
+   - 前q行： matrix.topRows(q)
+   - 后q行： matrix.bottomRows(q)
+   - 左p列： matrix.leftCols(p)
+   - 右q列： matrix.rightCols(q)
+** Block operations for vector
+   - 前n个： vector.head(n)
+   - 后n个： vector.tail(n)
+   - 中n个： vector.segment(i,n)

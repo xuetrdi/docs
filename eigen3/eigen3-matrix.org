@@ -1,0 +1,33 @@
+#+TITLE: Eigen3 matrix class
+
+** The Matrix class
+   + Matrix类有6个参数，前三个是必须参数,后三个是默认参数:
+     - Scalar: 标量类型
+     - RowsAtCompileTime: 行
+     - ColsAtCompileTime: 列
+   + Matrix的记法：为了使用方便我们使用typedef来涵盖通常情况
+     - =typedef Matrix<float, 4, 4> Matrix4f;=
+** The Vector
+   + vectors仅仅是Matrix的一个特殊的矩阵,1行或者列
+     - 列向量: =typedef Matrix<float, 3, 1> Vector3f;=, 列向量,传递行数参数
+     - 行向量: =typedef Matrix<int, 1, 2> RowVector2i;=
+** The special value Dynamic
+   Eigen不限制在*compile time*(编译时已知矩阵维度大小),RowsAtCompileTime和ColsAtCompileTime可以采用Dynamic表示编译时未知,
+   作为运行时变量处理。
+   
+** Constructors
+   + 默认构造器: 不执行任何动态内存分配,也不初始化矩阵系数: =Matrix3f a;=, 对于Matrices首先传递行数,对于Vector传递容量。
+   + 无效操作: 为了在固定大小和动态大小提供统一的API,在固定大小的矩阵上使用构造函数时合法的,即使传递的大小是无用的如: =Matrix3f a(3,3);=
+** Coefficient accessors
+   + 在Eigen中系数访问器和mutator是重载括号(parenthesis)
+     - 对于matrices始终首先传递的是行索引
+     - 对于vectors传递的是容量
+** Comma initialization
+   使用逗号进行矩阵系数初始化
+** Resizing(动态调整矩阵形状)
+   - 获取矩阵的行数: m.rows()
+   - 获取矩阵的列数: m.cols()
+   - 调整矩阵的形状: m.resize(newrows, newcols)
+   - 不改变coefficients的操作: conservativeResize()
+** Assignment and resizing
+   赋值操作重载了操作*=*
