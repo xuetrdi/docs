@@ -15,3 +15,4 @@
 8. [CentOS开发环境搭建](./env.md)
 9. [Mac 下go get配置](./go-get.rst)
 10. [使用CMake构建C/C++工程](./cmake.rst)
+11. [Eigen3](./eigen3/eigen3-intro.org)
