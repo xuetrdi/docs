@@ -1,0 +1,6 @@
+* About Eigen3
+  
+一个C++模版实现的C++线性代数的库。
+
+主要包含以下内容：
+1. file:./eigen3/eigen3-matrix.org
