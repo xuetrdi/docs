@@ -1,0 +1,18 @@
+* Linear algebra and decompositions
+   求解线性系统，计算各种分解，如LU,QR,SVD，特征分解。
+  
+** Basic linear solving(基本线性求解)
+   方程写成单个矩阵方程
+   - ColPivHouseholderQR是一个带有列旋转的QR分解。适用于所有矩阵，同时速度非常快。
+   - partialPivLu()
+   - fullPivLu()
+   - householdQr()
+   - colPivHouseholderQr()
+   - fullPivHouseholderQr()
+   - completeOrthogonalDecomposition()
+   - llt()
+   - ldlt()
+   - bdcSvd()
+   - jacobiSvd()
+** 检查是否存在解
+** Computing eigenvalues and eigenvectors(计算特征值和特征向量)

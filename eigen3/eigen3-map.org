@@ -1,0 +1,10 @@
+* Eigen Map class
+** Map intro
+   有时希望在Eigen中使用预定义的数字数组作为向量或者矩阵。
+   虽然一个选项是复制数据，但是最常见的是将内存重新用作特征类型。使用Map类非常容易完成。
+** Map类型和声明Map变量
+   - 指向定义系数数组的内存区域的指针
+   - 矩阵或向量的形状
+   - =Map<MatrixXf> mf(pf, rows, cols);=, 其中pf是指向array内存的float *的指针
+** Using Map variables
+** Changing the mapped array
