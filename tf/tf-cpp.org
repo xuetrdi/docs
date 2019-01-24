@@ -1,0 +1,192 @@
+* C++ TensorFlow
+
+** 简单说明
+
+   - MacOS 10.14
+   - TensorFlow 1.11
+
+   如果想要使用C API,构建tensorflow/libtensorflow.so;
+   如果想要使用C++ API,构建tensorflow/libtensorflow_cc.so;
+
+** 构建或安装工具
+
+   #+BEGIN_SRC shell
+     brew install autoconf
+     brew install automake
+     brew install libtool
+     brew install curl
+     brew install bazel
+     brew install cmake
+     brew install protobuf
+   #+END_SRC
+
+** 构建TensorFlow
+
+1. 环境准备
+
+   - Bazel 
+   - Numpy
+   - ProtocBuf
+
+   #+BEGIN_SRC shell
+     git clone https://github.com/tensorflow/tensorflow
+     cd tensorflow 
+     ./configure
+     bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+     bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+     pip install /tmp/tensorflow_pkg/tensorflow-\*.whl
+   #+END_SRC
+
+** 构建动态库
+
+   - Bazel
+   - ProtocBuf
+
+1. 环境准备
+
+   #+BEGIN_SRC shell
+     bazel build -c opt --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 --config=monolithic //tensorflow:libtensorflow_cc.so
+   #+END_SRC
+
+** 构建OpenCV
+
+1. 环境准备
+
+   - CMake
+
+   #+BEGIN_SRC shell
+     git clone https://github.com/opencv/opencv
+     cd opencv && git checkout 3.4
+     cd 
+     git clone https://github.com/opencv/opencv_contrib
+     cd opencv_contrib && git checkout 3.4
+     cd /path/to/opencv && mkdir build && cd build 
+
+     cmake -D CMAKE_BUILD_TYPE=RELEASE \
+           -D CMAKE_INSTALL_PREFIX=/usr/local \
+           -D INSTALL_C_EXAMPLES=ON \
+           -D INSTALL_PYTHON_EXAMPLES=ON \
+           -D WITH_TBB=ON \
+           -D WITH_V4L=ON \
+           -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+           -D BUILD_EXAMPLES=ON ..
+     make -j8
+     sudo make install 
+   #+END_SRC
+2. 配置编译选项
+   配置OpenCV的opencv.pc的文件的pkgconfig文件。配置编译器编译的头文件，以及链接的动态库。
+
+** 构建Eigen
+
+1. 环境准备
+   #+BEGIN_SRC shell
+     # `Eigen <https://github.com/eigenteam/eigen-git-mirror/releases>`_
+     tar xf eigen-git-mirror-\*.tar.gz
+     cd eigen-git-mirror
+     mkdir build && cd build
+     cmake ..
+     make
+     sudo make install
+   #+END_SRC
+
+** 基于CMake构建TensorFlow应用
+
+1. 环境准备
+
+   - CMake
+   - Eigen
+
+   #+BEGIN_SRC shell
+     cp -r bazel-genfiles  /usr/local/include/tensorflow/
+     cp -r tensorflow/cc   /usr/local/include/tensorflow/
+     cp -r tensorflow/core /usr/local/include/tensorflow/
+     cp -r third_party     /usr/local/include/tensorflow/
+
+     cp bazel-bin/tensorflow/libtensorflow_cc.so /usr/local/lib/
+     cp bazel-bin/tensorflow/libtensorflow_framework.so /usr/local/lib/
+   #+END_SRC
+
+2. 代码
+
+   #+BEGIN_SRC c++
+     #include <tensorflow/core/>
+   #+END_SRC
+
+   #+BEGIN_SRC cmake
+   
+   #+END_SRC
+
+3. 编写pkgconfig文件tensorflow.pc
+
+   #+BEGIN_SRC shell
+     Name: tensorflow
+     Description: TensorFlow pc file
+     Version: 1.0
+     Cflags: -I/usr/local/include 
+     Libs: -L/usr/local/lib -ltensorflow
+   #+END_SRC
+
+   #+BEGIN_SRC shell
+     mv /path/to/tensorflow.pc /usr/local/lib/pkgconfig/
+   #+END_SRC
+
+4. 配置命令行编译别名
+
+   #+BEGIN_SRC shell
+     alias tf="g++ `pkg-config --libs --cflags tensorflow`" 
+     # 增加到~/.bash_profile
+     source ~/.bash_profile
+   #+END_SRC
+
+5. 编译tensorflow应用代码
+
+   #+BEGIN_SRC shell
+     tf tf_example_main.cc
+   #+END_SRC
+
+** 基于Bazel构建TensorFlow应用
+
+1. 环境准备
+
+   - Bazel
+
+   #+BEGIN_SRC shell
+     mkdir tensorflow/cc/model
+     touch tensorflow/cc/model/model.cc
+     touch tensorflow/cc/model/BUILD
+   #+END_SRC
+
+2. 编写model.cc
+   #+BEGIN_SRC c++
+   
+   #+END_SRC
+
+3. 编写BUILD
+
+   #+BEGIN_SRC bazel
+   
+     load("//tensorflow:tensorflow.bzl", "tf_cc_binary")
+
+     tf_cc_binary(
+       name = "model",
+       srcs = ["model.cc"],
+       deps = [
+         "//tensorflow/cc:gradients",
+         "//tensorflow/cc:grad_ops",
+         "//tensorflow/cc:cc_ops",
+         "//tensorflow/cc:client_session",
+         "//tensorflow/core:tensorflow"
+       ],
+     )
+   #+END_SRC
+
+4. 构建和运行应用
+
+   #+BEGIN_SRC shell
+     bazel run -c opt //tensorflow/cc/models:model
+   #+END_SRC
+
+5. 检验结果
+
+
+
