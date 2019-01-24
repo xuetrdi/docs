@@ -5,10 +5,11 @@
    - MacOS 10.14
    - TensorFlow 1.11
 
-   如果想要使用C API,构建tensorflow/libtensorflow.so;
-   如果想要使用C++ API,构建tensorflow/libtensorflow_cc.so;
+   如果想要使用C API,构建tensorflow/libtensorflow.so
+   
+   如果想要使用C++ API,构建tensorflow/libtensorflow_cc.so
 
-** 构建或安装工具
+** 安装依赖工具
 
    #+BEGIN_SRC shell
      brew install autoconf
@@ -80,7 +81,7 @@
 
 1. 环境准备
    #+BEGIN_SRC shell
-     # `Eigen <https://github.com/eigenteam/eigen-git-mirror/releases>`_
+     # 下载地址`Eigen <https://github.com/eigenteam/eigen-git-mirror/releases>`_
      tar xf eigen-git-mirror-\*.tar.gz
      cd eigen-git-mirror
      mkdir build && cd build
