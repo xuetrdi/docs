@@ -1,0 +1,172 @@
+* 图像数字化
+** Numpy中的ndarray
+   OpenCV的Python API是基于Numpy的,是一种开源的数值计算扩展,用来存储和处理多维数组，其核心数据结构是ndarray。
+   - 构造方法
+   - 成员变量
+   - 成员函数
+*** 构造二维的ndarray
+    - 行数(高)
+    - 列数(宽)
+    - 数据类型
+    #+BEGIN_SRC python :results output
+      import numpy as np 
+      z = np.zeros((2,4), np.uint8)
+      print("z type:", type(z))
+      print("z:\n", z)
+    #+END_SRC
+
+    #+RESULTS:
+    : z type: <class 'numpy.ndarray'>
+    : z:
+    :  [[0 0 0 0]
+    :  [0 0 0 0]]
+*** 构造三维的ndarray
+    三维数组可以理解为每个元素都是一个二维数组。
+    #+BEGIN_SRC python :results output
+      import numpy as np 
+      m = np.array([
+                    [[1,2,3,4],[5,6,7,8]],
+                    [[10,11,12,13],[14,15,16,17]]
+                   ], np.float32)
+      print(m)
+    #+END_SRC
+
+    #+RESULTS:
+    : [[[ 1.  2.  3.  4.]
+    :   [ 5.  6.  7.  8.]]
+    : 
+    :  [[10. 11. 12. 13.]
+    :   [14. 15. 16. 17.]]]
+*** ndarray的成员变量
+    - ndarray.shape
+    - ndarray.dtype
+*** 访问二维ndarray中的值
+    #+BEGIN_SRC python :results output
+      import numpy as np 
+      m = np.array([[14,12,3,1],[10,12,114,29],[67,23,534,2]], np.float32)
+      print(m)
+      # 如何获取第r行c列的值(0为起始索引),第1行第3列
+      print("M1:", m[1,3]) # 29.0
+      # 如何获取第r行所有值,第二行
+      print("M2:", m[2,:])
+      # 获取某一列的所有值,第三列
+      print("M3:", m[:,3])
+      # 获取连续矩形区域的值,切片,第0行第1列至第2行第3列
+      print("M4:\n", m[0:2,1:3])
+    #+END_SRC
+
+    #+RESULTS:
+    : [[ 14.  12.   3.   1.]
+    :  [ 10.  12. 114.  29.]
+    :  [ 67.  23. 534.   2.]]
+    : M1: 29.0
+    : M2: [ 67.  23. 534.   2.]
+    : M3: [ 1. 29.  2.]
+    : M4:
+    :  [[ 12.   3.]
+    :  [ 12. 114.]]
+*** 访问三维数组中的值
+    #+BEGIN_SRC python :results output
+      import numpy as np 
+      m = np.array([[[1, 2, 3, 4],[5,6,7,8]],
+                    [[10,11,12,14],[15,16,17,18]],
+                    [[11,12,43,32],[1,5,10,23]]], dtype=np.float32)
+      print(m)
+      print("-----------------------")
+      # 三维数组是有二维数组组成。如何获取所有二维数组的第c列。例如m中所有二维数组的第0列。
+      print(m[:,:,0])
+      print("-----------------------")
+      # 如何获取三维数组中的第n个二维数据,第n个二维数组的所有行所有列
+      print(m[0,:,:])
+    #+END_SRC
+
+    #+RESULTS:
+    #+begin_example
+    [[[ 1.  2.  3.  4.]
+      [ 5.  6.  7.  8.]]
+
+     [[10. 11. 12. 14.]
+      [15. 16. 17. 18.]]
+
+     [[11. 12. 43. 32.]
+      [ 1.  5. 10. 23.]]]
+    -----------------------
+    [[ 1.  5.]
+     [10. 15.]
+     [11.  1.]]
+    -----------------------
+    [[1. 2. 3. 4.]
+     [5. 6. 7. 8.]]
+    #+end_example
+
+** ndarray矩阵运算
+*** 加法运算
+    #+BEGIN_SRC python :results output
+      import numpy as np 
+      src1 = np.array([[23,123,90],[100,250,0]], np.uint8)
+      src2 = np.array([[125,150,60],[100,10,40]], np.uint8)
+      # uint8最大值为255,ndarray的策略是大于255的数,对该数进行255取模运算,然后减1:(123+150)%255 - 1 = 17
+      print(src1 + src2)
+    #+END_SRC
+
+    #+RESULTS:
+    : [[148  17 150]
+    :  [200   4  40]]
+*** 减法运算
+    #+BEGIN_SRC python :results output
+      import numpy as np 
+      src1 = np.array([[23,123,90],[100,250,0]], np.uint8)
+      src2 = np.array([[125,150,60],[100,10,40]], np.uint8)
+      # uint8区间[0,255],如果减的结果小于0,ndarray的处理策略依然是:对该数进行255取模,然后加1: (23-125)%255 + 1 = 154
+      print(src1 - src2)
+    #+END_SRC
+
+    #+RESULTS:
+    : [[154 229  30]
+    :  [  0 240 216]]
+*** 点乘运算
+    #+BEGIN_SRC python :results output
+      import numpy as np 
+      src1 = np.array([[23,123,90],[100,250,0]], np.uint8)
+      src2 = np.array([[125,150,60],[100,10,40]], np.float32)
+      print(src1 * src2)
+    #+END_SRC
+
+    #+RESULTS:
+    : [[ 2875. 18450.  5400.]
+    :  [10000.  2500.     0.]]
+*** 点除运算
+    #+BEGIN_SRC python :results output
+      import numpy as np 
+      src1 = np.array([[23,123,90],[100,250,0]], np.float32)
+      src2 = np.array([[125,150,60],[100,10,40]], np.float32)
+      print(src2 / src1)
+      # 分母为0的情况分为两种:如果是uint8类型,则结果为0,如果为其它类型则为inf
+    #+END_SRC
+
+    #+RESULTS:
+    : [[5.4347825 1.2195122 0.6666667]
+    :  [1.        0.04            inf]]
+*** 矩阵乘法
+    #+BEGIN_SRC python :results output
+      import numpy as np 
+      src3 = np.array([[1,2,3],[4,5,6]], np.uint8)
+      src4 = np.array([[6,5],[4,3],[2,1]], np.uint8)
+      print(src3.dot(src4))
+    #+END_SRC
+
+    #+RESULTS:
+    : [[20 14]
+    :  [56 41]]
+*** 其它运算
+    - 对数运算:np.log(src)
+    - 指数运算:np.exp(src)
+    - 幂运算:np.power(src, x)
+    - 开平方:
+    - 绝对值:
+    - 求逆:
+    - 取最大值:
+** 在OpenCV中将一个彩色像素(向量)转化为灰度像素(数值)的公式
+                             [B
+   gray = (0.114 0.587 0.299) G
+                              R]

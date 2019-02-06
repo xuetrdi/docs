@@ -1,0 +1,33 @@
+* gRPC on Mac
+** Installing
+   - Install Pre-requisites
+   - Install OpenSSL
+   - Install gRPC
+*** Install Pre-requisites
+    #+begin_src shell
+      brew install autoconf automake libtool shtool
+      brew install gflags
+    #+end_src
+*** Install OpenSSL
+    #+begin_src shell
+      brew install openssl
+      export PATH="/usr/local/opt/openssl/bin:$PATH"
+      export LDFLAGS="-L/usr/local/opt/openssl/lib"
+      export CPPFLAGS="-I/usr/local/opt/openssl/include"
+      export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
+    #+end_src
+*** Install gRPC
+    #+begin_src shell
+      git clone -b $(curl -L https://grpc.io/release) https://github.com/grpc/grpc
+      cd grpc
+      git submodule update --init
+      make
+      make install
+    #+end_src
+*** Test
+    #+begin_src shell
+      cd examples/cpp/helloworld
+      make
+      ./greeter_server
+      ./greeter_client
+    #+end_src
