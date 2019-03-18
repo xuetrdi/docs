@@ -4,65 +4,65 @@
 
   - 行数(高)   : rows
   - 列数(宽)   : cols
-  - 通道数(深) : type, CV_8UC(n), CV_8UC1, 其中C(n)表示通道数
-  - 数据类型   : type, CV_8UC(n), 其中8U表示数据类型
+  - 通道数(深) : type, CV_8UC(n), CV_8UC1, 其中 C(n)表示通道数
+  - 数据类型   : type, CV_8UC(n), 其中 8U 表示数据类型
   - 构造函数   : Mat(int rows, int cols, int type), Mat(Size(int cols, int rows), int type), 两种存储顺序不一样。
 
 ** 成员
 
   1. 成员属性: rows,cols
-  2. 成员函数: size(),返回Size对象
+  2. 成员函数: size(),返回 Size 对象
   3. 成员函数: channels(),得到矩阵的通道数
   4. 成员函数: total(),返回行数乘以列数,面积大小。
   5. 成员变量: dims, 矩阵的维数。单通道就是二维，多通道就是三维。
 
-** 构造单通道Mat对象
+** 构造单通道 Mat 对象
    #+BEGIN_SRC c++
      #include <opencv2/core/core.hpp>
-     # 方法1
+     // 方法 1
      cv::Mat( 2, 3, CV_32FC(1));
-     # 方法2
+     // 方法 2
      cv::Mat m;
      m.create(2, 3, CV_32FC1)
    #+END_SRC
 
 ** 初始化
 
-  1. Comma初始化
+  1. Comma 初始化
 
-** 访问单通道Mat对象中的值
+** 访问单通道 Mat 对象中的值
 
-  1. 利用成员函数: at, m.at<float>(r,c), 访问r行c列的值。
-  2. 利用成员函数: ptr, 双for循环
-  3. 利用成员函数: isContinuous和ptr,单for循环
-  4. 利用成员变量: step和data, \*(int\*)(m.data + m.step[0]\*r + c\*m.step[1]),如果是float类型则换掉int
+  1. 利用成员函数: at, m.at<float>(r,c), 访问 r 行 c 列的值。
+  2. 利用成员函数: ptr, 双 for 循环
+  3. 利用成员函数: isContinuous 和 ptr,单 for 循环
+  4. 利用成员变量: step 和 data, \*(int\*)(m.data + m.step[0]\*r + c\*m.step[1]),如果是 float 类型则换掉 int
 
-** 构造多通道Mat对象
+** 构造多通道 Mat 对象
    #+BEGIN_SRC c++
      cv::Mat(Mat_<Vec3f>(2,2) << Vec3f(1,11,21), Vec3f(2,12,32),
                                 Vec3f(3,13,23), Vec3f(4,24,34));
    #+END_SRC
 
-** 访问多通道Mat对象中的值
+** 访问多通道 Mat 对象中的值
 
   1. 利用成员函数: at
   2. 利用成员函数: ptr
-  3. 利用成员函数: isContinuous和ptr
-  4. 利用成员变量: data和step
-  5. 分离通道: split(m， planes)
+  3. 利用成员函数: isContinuous 和 ptr
+  4. 利用成员变量: data 和 step
+  5. 分离通道: split(m，planes)
   6. 合并通道: merge(const Mat\* mv, size_t count, OutputArray dst)
 
-** 获得Mat中某一区域的值
+** 获得 Mat 中某一区域的值
 
-  1. 使用成员函数:`row(i)`或`col(j)`,得到第i行或者第j列
+  1. 使用成员函数:`row(i)`或`col(j)`,得到第 i 行或者第 j 列
   2. 使用成员函数:`rowRange(int start, int end)`或`colRange(int start, int end)`,得到连续行或连续列
   3. 使用成员函数:`clone()`和`copyTo()`,把选中的区域复制一份
-  4. 使用Rect类:`Rect(x,y,w,h)`, `Rect(Point(lx, ly), Point(rx, ry))`, `Rect(Point(lx,ly), Size(w,h))`
+  4. 使用 Rect 类:`Rect(x,y,w,h)`, `Rect(Point(lx, ly), Point(rx, ry))`, `Rect(Point(lx,ly), Size(w,h))`
 
-** Matrix运算
+** Matrix 运算
 
-  1. 加法运算: `add()`, 形状相同的两个矩阵，对应位置相加。 注意在Mat中如果相加值大于255，则截断为255。
-  2. 减法运算: `subtract()`, 形状形同的两个矩阵，对应位置相减。 注意在Mat中相减小于0，则截断为0。
+  1. 加法运算: `add()`, 形状相同的两个矩阵，对应位置相加。 注意在 Mat 中如果相加值大于 255，则截断为 255。
+  2. 减法运算: `subtract()`, 形状形同的两个矩阵，对应位置相减。 注意在 Mat 中相减小于 0，则截断为 0。
   3. 点乘运算: 成员函数`m1.mul(m2)`或`multiply(m1, m2)`,两个形状相同的矩阵对应位置相乘。
   4. 点除运算: `divide()`,两个相同形状的矩阵，对应位置相除。
   5. 乘法运算: `gemm()`,矩阵乘法。
@@ -71,14 +71,14 @@
   8. 幂指数运算: `pow()`
   9. 开平方运算: `sqrt()`
 
-** 灰度图像转换为Mat
+** 灰度图像转换为 Mat
   #+BEGIN_SRC c++
     #include <opencv2/highgui/highgui.hpp>
 
     cv::Mat imread(filename, int flag=1)
   #+END_SRC
 
-** 彩色图像转换为多通道Mat
+** 彩色图像转换为多通道 Mat
   #+BEGIN_SRC c++
     #include <opencv2/core/core.hpp>
 
