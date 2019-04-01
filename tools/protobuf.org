@@ -1,2 +1,149 @@
-* Protocol Buffer
+* Protocol Buffer 3
 
+ - 定义一个 Message 类型
+ _ 定义一个 Value 类型
+ _ 默认值
+ - 枚举
+ - 使用 Message 类型
+ - 嵌套类型(Nested Types)
+ - 更新一个 Message 类型
+ - 未知字段
+ - Any 类型
+ - Oneof
+ - Maps 类型
+ - Packages
+ - 定义服务
+ - JSON 映射
+ - 可选项
+ - 生成类
+
+** 定义一个 Message 类型
+   #+begin_src protobuf
+     syntax = "proto3"
+     message SearchRequest{
+       string query = 1;
+       int32 page_number = 2;
+       int32 result_per_page = 3;
+     }
+   #+end_src
+   1. 第一个非注释行要写 syntax="proto3",如果不写 protoc 则使用 proto 语法进行编译
+   2. 每个数据片段都要包含在 message 中
+   3. 每一个字段有一个 name 和 type
+*** 指定字段类型
+    1. 标量类型(string, int32)
+    2. 枚举消息类型
+    3. 自定义消息类型
+*** 分配字段编号
+    message 中每个字段都有唯一的编号
+    这些字段编号用于消息二进制格式标识字段,并且在使用消息类型后不应更改
+    1-15 编号:占用一个字节
+    16-2047:占用两个字节
+    所以尽量使用 1-15
+    另外为将来可能添加的频繁出现的元素流出一些空间
+*** 指定字段规则
+    repted
+*** 保留字段(Reserved Field)
+    reserved 字段名或者字段编号
+    指定保留字段,删除一些不用的字段,防止重新使用
+** 标量类型
+   - double: float64
+   - float: float32
+   - int32
+   - int64
+   - uint32
+   - uint64
+   - sint32: int32
+   - sint64: int64
+   - fixed32: 比 uint32 高效
+   - fixed64
+   - sfixed32: 总是四字节
+   - sfixed64
+   - string
+   - bytes: 包含任意字节的序列
+** 默认值
+   - For strings:默认空字符串
+   - For bytes: 默认空 bytes
+   - For bool: false
+   - For numeric types: 0
+   - For enums: 第一个枚举值,其余必须是 0
+   - For message fields
+** 枚举
+   #+begin_src protobuf
+     message SearchRequest {
+       string query = 1;
+       int32 page_number = 2;
+       int32 result_per_page = 3;
+       enum Corpus {
+         UNIVERSAL = 0;
+         WEB = 1;
+         IMAGES = 2;
+         LOCAL = 3;
+         NEWS = 4;
+         PRODUCTS = 5;
+         VIDEO = 6;
+       }
+       Corpus corpus = 4;
+     }
+   #+end_src
+** 使用其他 message
+   #+begin_src protobuf
+     message SearchResponse {
+       repeated Result results = 1;
+     }
+     message Result {
+       string url = 1;
+       string title = 2;
+       repeated string snippets = 3;
+     }
+   #+end_src
+** 嵌套类型
+   #+begin_src protobuf
+     message SearchResponse {
+       message Result {
+         string url = 1;
+         string title = 2;
+         repeated string snippets = 3;
+       }
+       repeated Result results = 1
+     }
+   #+end_src
+** 更新一个消息类型
+*** 新增字段
+    - 不要更改现有字段的编号
+*** 删除一个字段
+*** 标量类型的兼容性
+** 未知字段
+   未知字段是格式良好的协议缓冲区序列化数据,表示解析器无法识别的字段
+** Any 类型
+   Any 类型允许将消息用作嵌入类型,无需定义
+   Any 包含任意序列消息作为字节,以及作为该消息类型的全局唯一标识符并解析 URL
+** Oneof
+   一个包含许多字段的 message，并且最多只能同时设置一个字段,则可以使用 oneof 功能强制执行此行为并节省内存
+** Maps
+   如果要写数据定义中创建关联映射,协议缓冲区提供了一种方便的快捷方式语法
+   map<key_type, value_type> map_field = N;
+   其中 key_type: 除了浮点数和字节类型意外的任何标量类型，也不能是枚举类型
+   map 字段不能被 repeated
+** Packages
+   防止*.proto 文件之间的命名冲突
+** 定义服务
+   #+begin_src protobuf
+     service SearchService {
+       rpc Search (SearchRequest) returns (SearchResponse);
+     }
+   #+end_src
+** JSON 映射
+   Proto3 支持 JSON 中的规范编码,使得在系统之间共享数据变得更加容易
+** 可选项
+   常用的可选项
+   - option java_package
+   - option java_multiple_files
+   - option java_outer_classname
+   - option optimize_for
+   - cc_enable_arenas
+   - objc_class_prefix
+   - deprecated: 如果为 true,表示该字段已弃用
+** 生成类
+   #+begin_src shell
+     protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --python_out=DST_DIR --go_out=DST_DIR /path/to/file.proto
+   #+end_src
