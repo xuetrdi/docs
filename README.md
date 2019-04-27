@@ -22,6 +22,6 @@
 14. [目标检测](./object-detection/README.org)
 15. [Mac相关](./osx/README.org)
 16. [并行计算](./parallel/README.org)
-17. [Python](./python/README.org)
+17. [Python](./python/README.md)
 18. [TensorFlow笔记](./tf/README.org)
 19. [相关工具使用笔记](./tools/README.md)
