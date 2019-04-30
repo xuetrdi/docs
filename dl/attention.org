@@ -1,0 +1,21 @@
+** Attention
+   
+** 什么是注意力机制
+   当人们看到一样东西的时候,当前时刻关注的一定是我们当前正在看的这样东西的某一地方,换句话说,当我们目光移到别处时,注意力随着目光的移动也在转移,
+   这意味着,当人们注意到某个目标或者场景时,该目标内部以及场景内每一处空间位置上的注意力分布式不一样的。
+** Attention 种类
+   - Spatial Attention: 空间注意力
+   - Temporal Attention: 时间注意力(序列)
+   - Soft Attention: 所有的数据都会注意,都会计算出相应的注意力权重,不会设置筛选条件
+   - Hard Attention: 生成注意力权重后筛选掉一部分不符合条件的注意力,让其权值为`0`,即可以理解为不再注意这些不符合条件的部分
+** Encoder-Decoder 框架
+   - 对一个`RNN`处理源序列`F`来计算语言模型的初始状态。
+   - 计算输出序列`E`的概率
+   - 通过神经网络来编码`F`的信息到一个隐层状态,再使用第二个神经网络来预测`E`解码该隐层到输出序列的模型
+   - 缺点: 无论多长的`context`都会被压缩到一个几百维`vector`,`context`越长,`state vector`丢失越多的信息
+** Attention 的思想
+   得到`Encoder`向量后,在进行`Decoder`的时候模型不仅会用到向量还会用到每个词对应的`RNN`隐层向量。
+** Encoder-Decoder 与 Attention 的异同点
+   `Encoder`部分相同
+   `Encoder-Decoder`是注意力分散模型
+   `Encoder-Attention-Softmax`谷歌神经翻译架构
