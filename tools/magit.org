@@ -5,6 +5,6 @@
   - SPC g s | 选中文件然后按`u`： 切换分支
   - SPC g C : 切换分支
   - SPC g i : 初始化仓库
-  - SPC g P : 推送仓库
+  - SPC g s P p: 推送仓库
   - SPC g S : 添加当前文件
   - SPC g l l : 查看日志
