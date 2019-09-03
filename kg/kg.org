@@ -1,0 +1,47 @@
+* Knowledge Graph
+  简单的说,知识图谱就是用来存储实体与实体之间的关系。
+  从图结构来看,每一实体可以有或多或少的关联到其它实体上,是高度灵活的并且可以代表我们世界中的许多事物。
+  知识图谱的一大好处是可以存储许多类型的信息。因此通过添加更多实体并在现有实体和新实体之间添加连接，可轻松扩展具有新知识的知识图谱
+  
+  正式的定义:
+  1. 描述现实世界的实体以及相互关系
+  2. 在 schema 中定义可能的类与实体的关系
+  3. 允许任意实体相互可以做关联
+  4. 涵盖各种主题领域
+
+* 本体论(ontology)
+  本体论包含:
+  - representatin(表示)
+  - formal naming
+  - definition of the categories
+  - properties
+  - relations between the concepts
+  - data
+  - entites(one, many, all domains)
+
+  需要具有领域知识的人才能正确地进行标记并创建本体,但是这是一个快速的过程,人类只判断主题,而不必阅读所有文件。
+
+  
+** building the Knowledge Graph
+   文档中的实体和元数据被链接到商业领域的本体描述(ontology describing),在图中自然的表示他们之间关系
+   
+   ontology 是依赖于 domain,但技术本质是相似
+
+   
+   #+begin_src plantuml :cmdline -charset utf-8 :results output :file ./kg-01.png
+     skinparam rectangle {
+       roundCorner 25
+     }
+     rectangle Entity1
+     rectangle Entity2
+
+     Entity1 --> Entity2 : Relationship
+
+     rectangle Entity
+     rectangle Value
+
+     Entity --> Value : Attr
+   #+end_src
+
+   #+RESULTS:
+   [[file:./kg-01.png]]

@@ -1,0 +1,56 @@
+* TikZ-UML
+  
+** 从`UML`语义的角度来看,有`12`中不同关系对应命令:
+   - dependency(依赖): umldep ,虚线箭头(-->)
+   - association(关联): umlassoc , 实线无箭头(--)
+   - unidirectional association(单向关联): umluniassoc, 实线单方向箭头(->)
+   - aggregation(聚合): umlaggreg, 单向菱形箭头(o-)
+   - unidirectional aggregation(单向聚合): umluniaggreg, 双向箭头,菱形和正常箭头(o->)
+   - composition(组合): umlcompo, 单向实心菱形箭头(O-)
+   - unidirectional composition(单向组合): umlunicompo, 实心菱形和正常箭头(O->)
+   - import(包导入): umlimport, 虚线箭头(-->)
+   - inheritance(继承): umlinherit, 实线单向空心三角形
+   - implementation(实现): umlimpl, 虚线单向空心三角形
+   - nesting(嵌套): umlnest, 实线单向圆中加号
+   - realization(实现): umlreal, 虚线单向空心三角形
+   通过权重`weight`来调节折线的比例
+   例如`umluniaggreg[geometry=-|-, weight=0.3]{A3}{A2}`: 表示-|-竖线为切割的比例,默认是`0.5`
+   属性:
+   - geometry: 表示连接的线性
+   - weight: 表示连接的线性偏重的比例,默认是`0.5`
+   - arm1: 控制第一个段的大小,正值向右,负值向左
+   - arm2: 控制最后一个段的大小,正值向右,负值向左
+   - arg1: 定义名称(key)
+   - arg2: 定义名称
+   - mult1: 除了 arg 之外还有名称
+   - mult2:
+   - attr1=arg1|mult1: 是一种简洁书写方式
+   - attr2=arg2|mult2
+   - pos1: 放置属性值(value)
+   - pos2: 放置属性值
+   - align1: 对齐方式
+   - align2: 对齐方式
+   - stereo: 关系原型描述,放置在 pos 后面
+   - archor1: 调整锚点,表示连接的洛在的角度,逆时针,可以使用负值表示, 如: south 表示 90
+   - archor2:
+   - archors: 用 and 连接 anchor1 和 anchor2 的值
+   - loopsize: 定义递归关系
+** 定义关系的几何关系
+   - 直线: `--`
+   - 水平然后垂直: `-|`, umlHVrelation
+   - 垂直然后水平: `|-`, umlVHrelation
+   - 水平弯道: `-|-`, umlHVHrelation
+   - 垂直弯道: `|-|`, umlVHVrelation
+** Environment
+   + 定义一个包的环境: =umlpackage= , =umlemptypackage=
+     - x=0
+     - y=0
+     - type: context
+   + 定义一个类的环境: =umlclass= , =umlemptyclass= , =umlsimpleclass=
+     - x=0
+     - y=0
+     - type: interface,abstract
+     - tags: v1.0
+     - template
+   + 定义静态方法: =umlstatic=
+   + 定义一个虚方法: =umlvirt=

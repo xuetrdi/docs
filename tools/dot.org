@@ -1,0 +1,116 @@
+* DOT 语言
+  
+** DOT 语法定义
+   - 单引号表示文字字符
+   - 小括号表示分组
+   - 方括号表示可选项
+   - 竖线表示选其一
+** 关键字
+   - node
+   - edge
+   - graph
+   - digraph
+   - subgraph
+   - strict
+** graph 中 node 连接符
+   - 有向图: ->
+   - 无向图: --
+** 注释
+   - 支持 C++注释方式
+   - ,和;可以增强代码可读性,但不是必须的
+   - dot 允许双引号字符串
+   - 多个物理行使用反斜杠连接
+   - 双引号连接的字符串可以使用"+"连接
+** 子图和集群
+   子图在 Graphviz 中扮演三个角色:
+   - 子图用于表示图结构,表明某些节点和边应该组合在一起
+   - 子图可以提供设置属性的上下文,例如可以指定子图中所有节点的颜色,匿名子图中的节点处于同一个级别上
+   - 镞子图:图形将如何由某些布局引擎布局
+** 语法定义
+   - 一个图必须是有向图或无向图
+   - 有向图中节点必须使用->连接,无向图节点必须使用--连接
+** Graph Attribute
+   - Damping: 阻尼力运动因素,每次迭代中,节点移动限于其潜在的运动的因素。
+   - K: 用于虚拟物理模型的 Spring 常量
+   - URL: 超链接
+   - area:
+   - arrowhead:
+   - arrowsize:
+   - arrowtail: 箭头尾部边缘的形状
+   - bb: 边界框的绘图点
+   - bgcolor: 根图、子图的背景颜色
+   - center: 如果为 true,则绘图将在输出画布中居中
+   - charset: 指定将字符串输入解释为文本标签时使用的字符变换,默认是 UTF-8
+   - clusterrank: 用于处理集群的模式,子图名称以 cluster 开头的名称特殊处理
+   - color: 图形的基本绘图颜色
+   - fontcolor: 文字颜色
+   - colorscheme: 属性指定颜色方案命名空间
+   - comment: 注释插入输出中
+   - compound: 如果 true 则允许 clusters 之间的 edges
+   - concentrate: 如果是 true，使用 concentrators 的 edge
+   - constraint: 如果 false,边不对节点进行排序
+   - decorate: 如果 true,则通过两段折线将边缘标签附加到边
+   - defaultdist: 这个指定单独连接组件中节点之间的距离,如果设置的太小,连接组件可能会重叠.
+   - dim: 设置用户布局的尺寸,最大值为 10
+   - dimem: 设置渲染的维数,最大值为 10
+   - dir: 设置绘制箭头的边的类型
+   - epsilon: 终止条件
+   - labeljust: 集群的标签原则:r,表示在边界矩形内右对齐;l 表示左对齐,否则居中,子图集成父图的属性
+   - labelloc: 垂直放置节点,根图,集群的标签,对于根图和集群图仅允许 t(顶部)和 b(底部),对于节点,当节点高度大于其标签的高度时用,c,t,b
+   - labeltarget: 边的 URL 属性(超链接)
+   - landscape: 如果为 true,则以横向模型呈现
+   - layer: 指定存在节点,边或集群的层
+   - layerlistseq:
+   - layers
+   - layerselect
+   - layersep
+   - layout: 指定使用布局算法的名称:dot,neato
+   - len: 边的长度
+   - levels: 多级方案中允许的级别数
+   - levelsgap
+   - lheight: graph,cluster 的高
+   - lp: 标签位置
+   - ltail: 边缘的逻辑尾部
+   - lwidth: graph,cluster 的宽
+   - margin:
+   - maxiter
+   - mclimit
+   - mindist
+   - minlen: 最小边的长度
+   - mode: 优化布局,major,KK,hier,spring
+   - model: 指定如果为输入 graph 计算距离矩阵
+   - normalize: 最终布局归一化坐标
+   - orientation: 用于转换多边形节点形状的角度
+   - overlap: 是否删除节点重叠
+   - pin: 如果为 true 且节点在输入上具有 pos 属性,则 neato 或 fdp 会阻止节点从输入位置移动
+   - pos: 节点的位置
+   - quadtree
+   - quantum
+   - rank: 对子图中的节点排名约束
+   - rankdir: 设置图形布局的方向
+   - rankseq
+   - ratio: 高宽比
+   - rotate: 设置画旋转的角度
+   - ratation: 使最终布局逆时针旋转指定的度数
+   - shape: 节点的形状
+        box: 方框
+        ploygon: 多边形
+        ellipse: 椭圆
+        oval: 椭圆
+        circle: 圆
+        point: 点
+        egg: 鸡蛋
+        triangle: 三角形
+        plaintext: 纯文本
+        plain: 纯文本
+        diamond: 菱形
+        trapezium: 梯形
+        parallelogram: 平行四边形
+        house: 房子
+        pentagon: 五角星
+   - sides: 多边形的边
+   - size: 最大的宽和高
+   - style: 
+      节点: solid:实线,dotted:虚点线,dashed:虚线,striped:条纹:bold:粗体实线,rounded:圆角矩形,filled:填充椭圆,wedged:楔形
+      边 : solid: 实线, dotted:虚点,dashed:虚线,blod:粗体
+      集群图:外接矩形形状: solid: 实线,dashed:虚线,dotted:虚点,blod 粗体,rounded:圆角矩形,filled:填充,striped:条纹

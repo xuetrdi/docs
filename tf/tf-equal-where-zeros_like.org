@@ -1,0 +1,89 @@
+* TensorFlow 特殊函数
+
+  - tf.where()
+  - tf.zores_like()
+  - tf.equal()
+  - tf.metrics.mean_iou()
+  - tf.metrics.accuracy()
+  - tf.metrics.precision()
+  - tf.metrics.recall()
+
+** tf.where(condition, x=None, y=None, name=None)
+   condition: A Tensor of type bool
+   condition条件张量扮演掩码选择的功能,根据condition中每个元素值的True/False,决定是输出x中的值还是y中的值
+   - condition是2-D:
+     1. If x==y==None:
+       返回True值的坐标位置2-D形式输出：其中每个Ture值的形式:[row, col],表示在那一行那一列的值为True
+     2. If x.shape==y.shape and non-None:
+       如果condition中是True,则从选x中的元素,如果是False则从y中选元素。
+   - condition是1-D:
+     如果condition是向量,x和y是更高维的矩阵。那么condition选择复制x或y那个里面的一行.
+    #+BEGIN_SRC python :results output
+      import tensorflow as tf
+      x = [[1,2,3], 
+           [4,5,6]]
+      y = [[7,8,9], 
+           [10,11,12]]
+      cond1 = [[True, False, False], 
+               [False, True, True]]
+      cond2 = [[True, False, False], 
+               [True, True, False]]
+      cond3 = [True, False]
+      with tf.Session() as sess:
+        print(sess.run(tf.where(cond1)))
+        print(sess.run(tf.where(cond2)))
+        print(sess.run(tf.where(cond1, x, y)))
+        print(sess.run(tf.where(cond2, x, y)))
+        print(sess.run(tf.where(cond3, x, y)))
+    #+END_SRC
+
+    #+RESULTS:
+    #+begin_example
+    [[0 0]
+     [1 1]
+     [1 2]]
+    [[0 0]
+     [1 0]
+     [1 1]]
+    [[ 1  8  9]
+     [10  5  6]]
+    [[ 1  8  9]
+     [ 4  5 12]]
+    [[ 1  2  3]
+     [10 11 12]]
+    #+end_example
+
+** tf.zores_like(tensor, dtype=None, name=None, optimize=True)
+   创建一个与输入tensor形状相同的张量，并且所有元素都设置成0
+   #+BEGIN_SRC python :results output
+     import tensorflow as tf
+     tensor = tf.constant([[1,2,3], [4,5,6]])
+     print(tf.Session().run(tf.zeros_like(tensor)))
+   #+END_SRC
+
+   #+RESULTS:
+   : [[0 0 0]
+   :  [0 0 0]]
+
+** tf.equal(x, y, name=None)
+   条件: x.shape==y.shape
+   返回: x == y 的bool值
+
+** tf.metrics.mean_iou(labels, predictions, num_classes, weights)
+   计算每步平均交并比(mIOU)
+   Mean Inteection-Over-Union是语义分割的常用评估指标，它首先计算每个语义类的IOU,然后计算平均值
+   IOU的定义如下：
+   IOU = true_positive / (true_positive + false_positive + false_negative)
+   预测在混淆矩阵中累积，按weights加权,然后从中计算mIOU
+   为了估计数据流上的度量，该函数创建update_op操作，更新这些变量并返回mean_iou
+   如果weigths是None,权重默认为1,使用权重0来mask值
+   - labels: 具有形状[batch size],类型int32或int64的真实标签。如果不是rank>1,需要flattened成rank=1
+   - predictions: 语义标签的预测结果,其形状为[batch size]并且类型int32或int64。如果rank>1,需要flattened成rank=1
+   - num_classes: 预测任务可能具有的标签的数量。必须提供此值，因为将分配维度[num_classes, num_classes]的混淆矩阵。
+   - weights: rank=0或者等于rank[labels],支持广播,可选参数，如果为None，则默认值为1.0
+   - metrics_collections: 可选参数,列表。添加mean_iou
+   - updates_collections: 可选参数,列表。添加update_op
+   
+   返回值：
+   - mean_iou: 表示mIOU的张量
+   - update_op: 增加混淆矩阵的操作

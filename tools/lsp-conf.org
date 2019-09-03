@@ -1,0 +1,6 @@
+* Spaceemacs LSP 各种语言配置
+  
+** Python 配置 LSP
+*** 两个需要注意的问题
+    - 把 pyls 设置在环境变量`PATH`中
+    - jedi 版本: 0.13.3

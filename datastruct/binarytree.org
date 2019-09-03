@@ -1,0 +1,27 @@
+* 二叉树
+  - 抽象数据结构
+  - 二叉树的前序遍历
+  - 二叉树的中序遍历
+  - 二叉树的后序遍历
+  - 二叉树的层序遍历
+
+  #+begin_src python
+    class _Node:
+      """Define a node of tree.""" 
+      self._element = element
+      self._left = left
+      self._right = right
+
+    def preorder(node): 
+      if node is None:
+        return None
+      print(node)
+      preorder(node._left)
+      preorder(node_right)
+  #+end_src
+  
+** 中序遍历
+   输出的结果是有序的结果
+   
+** 后序遍历
+   应用在父类释放子类的内存等场景

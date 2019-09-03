@@ -1,0 +1,3 @@
+* Shadowsocks + Privoxy
+** Privoxy 配置注意事项
+   - 端口转发功能: forward-socks5t /  127.0.0.1:1080 .

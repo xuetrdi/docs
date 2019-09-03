@@ -1,0 +1,16 @@
+* AutoGraph: 图的简易控制流程
+  将原生的 Python 代码转换成 Tensorflow Graph 代码
+  使用@tf.function 会自动应用 AutoGraph
+  
+  - 设置级别
+  - to_code()
+  - to_graph()
+  - trace(): 在编译时追踪参数信息
+  #+begin_src python :results output :preamble "# -*- coding: utf-8 -*-" 
+    import tensorflow as tf
+    print(tf.__version__)
+
+  #+end_src
+
+  #+RESULTS:
+  : 2.0.0-beta0

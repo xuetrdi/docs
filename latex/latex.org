@@ -1,0 +1,101 @@
+* LaTex Math
+  
+** LaTex是书写规则
+   1. 命令(command)由backslash(反斜杠)作为开始
+   2. 区分大小写
+   3. 命令后跟参数,参数必须包含在{}中
+   4. 可选参数内部使用[],如果参数出现在最后,为了使下面文本的第一个字符成为一个空[],将它隐藏在{}
+   5. 一些命令是一种声明,作用是更改某个值或者参数的含义
+   6. * form
+   7. 环境(environment)名称必须begin匹配end
+   8. 环境(environment)可能包含参数
+   
+** Document classes
+   \documentclass[options]{class}
+   文档的整体类是使用此命令定义的,该命令通常是LaTex源文件中的第一个命令
+   
+*** LaTex中内置了以下文档类名:
+    
+    - article: 对于journal, article, presentation(演示文稿)和其它杂项用途。
+    - book   : 完整书籍,包括章节,可能包含前言和前面的事项或附录
+    - letter : 邮件
+    - report : 对于article和book之间的长度文件，例如技术报告或论文，可能包含几个章节。
+    - slides : 对于幻灯片演示
+*** Document class options
+    通过[]将它们括起来,指定多个选项用comma(逗号)隔开。
+    \documentclass[options1,options2,...]{class}
+    所有标准类都接受这些可选项列表:
+    - 字体大小选项: a4paper, a5paper, b5paper, executivepaper, legalpaper, letterpaper
+    排版杂项(Miscellaneous):
+    - 是否带框: 标记(draft)或不标记(final)带有黑框的boxes,默认是final
+    - 左对齐: 公式默认是居中,调整为左对齐(fleqn)
+    - landscape: 选项横向格式,默认是portrait(直式)
+    - leqno : 将方程数放在方程的左侧,默认是右侧
+    - openbib: 使用开放式数目格式
+    - 指定是否有标题信息和摘要的单独页面。报告类默认值是titlepage,对于其他类是notitlepage
+*** Additional package
+    指定多个包使用逗号分隔
+    \usepackage[]{pkg1,pkg2,...}
+** Fonts
+   
+** Layout
+   
+** Sectioning
+   
+** Cross references
+   - \label : 为一段文本指定符号名称
+   - \pageref: 引用的页码
+   - \ref : 引用章节,图(figure)或相似内容
+   前一段中描述的行为导致文档具有向引用时出现,\ref出现正在关联的\label之前
+   
+** Environments
+   - abstract: 产生一个abstract，可能是多个段落,此环境仅在articel和report文档类
+   - array: 生成数学数组，此环境只能再math mode下使用，并且通常出现在显示的数学环境中,例如equation,行内使用&分割
+   - center: 创建一个新段落,该段落从左到右内边距居中。
+   - centering: 将内容置于其范围内,最常用于诸如figure或parbox之类的环境中。
+   - description: 制作标签项清单,每个项目的标签都以粗体排版并左对齐。
+   - displaymath: math text, 以自己的行排列数学文本,以显示样式和矩阵。要左对齐使用fleqn 
+   
+** \\
+   
+** Page breaking
+   
+** Footnotes
+   
+** Definitions
+   
+** Counters
+** Lengths
+   
+** Making paragraphs
+** Math formulas
+   
+** Modes
+   
+** Page styles
+   
+** Spaces
+** Boxes
+   
+** Color
+   
+** Graphics
+   
+** Special insertions
+   
+** Splitting the input
+   
+** Letters
+   
+** Terminal input/output
+   
+** Command line
+** LeTex Matrix
+   package: =\usepackage{amsmath}=
+   不同矩阵的表示形式:
+   - matrix: 无括号包围的矩阵
+   - pmatrix: 圆括号包围的矩阵
+   - bmatrix: 方括号包围的矩阵
+   - vmatrix: 单竖线包围的矩阵
+   - Vmatrix: 双竖线包围的矩阵
+   
