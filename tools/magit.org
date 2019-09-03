@@ -1,0 +1,10 @@
+* Spacemacs Git 的用法
+  - SPC g s : 查看状态
+  - SPC g s 然后使用 s 选中需要添加到提交区的文件
+  - SPC g c c : 提交 ,然后写 log，写完之后`,c`完成提交
+  - SPC g s | 选中文件然后按`u`： 切换分支
+  - SPC g C : 切换分支
+  - SPC g i : 初始化仓库
+  - SPC g P : 推送仓库
+  - SPC g S : 添加当前文件
+  - SPC g l l : 查看日志
