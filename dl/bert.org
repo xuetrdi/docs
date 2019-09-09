@@ -1,0 +1,34 @@
+* BERT Implemented
+  - Token Embedding
+  - Segment Embedding
+  - Position Embedding
+  BERT 通过 Token 嵌入层传递每个输入 Token 以便将每个 Token 转换为 Vector representation
+  与其它深度学习模型不同，BERT 以 Segment Embedding 和 Position Embedding 的形式具有额外的嵌入层
+** Token Embedding
+   Token Embedding layer 的作用是将单词转换为固定维度的向量表示，在 BERT 的情况下，每个单词表示为 768 维向量
+   WordPiece tokenization
+** Segment Embedding
+   BERT 能够在给定一对输入文本情况下解决涉及文本分类的 NLP 任务。这种问题的一个例子是分类两段文本是否在语义上相似
+   这对输入文本被简单连接起来并输入到模型中，那么 BERT 如何区分给定 pairs 中的输入？答案是 Segment Embedding
+   - concat and tokenize
+   - label to distinglish input(前一句 0，后句 1)
+   - lookup vector representation
+   - Segment Embedding
+   Segment Embedding layer only has 2 vector representation
+   - first vector (index 0) 分配给属于 input 1 的所有标记
+   - last vector (index 1) 分配给属于 input 2 的所有标记
+   - 如果输入只包含一个输入句子，那么它的 segment embedding 表示 index 0 相应的向量
+** Position Embedding 
+   BERT consists of a stack of Transformers 
+   broadly speaking(广义上说)，Transformers 不编码输入的 sequential nature
+   To summarize(总而言之)，使用 Position embedding 允许 BERT 对输入进行理解
+   BERT 设计用于处理长度为 512 的输入序列，作者通过让 BERT 学习每个位置的矢量表示来结合输入序列的顺序性质
+   Position Embedding layer 是一个大小(512, 768)的查找表，其中第一行是第一个位置中任何 word 的向量表示
+   第二行是第二个位置中任何 word 的向量表示
+** Combining Representation
+   tokenized input sequence of length n 具有三个不同的表示：
+   - Token Embeddings with shape (1, n, 768) :所有单词的向量表示
+   - Segment Embeddings with shape (1, n, 768) :区分成对的输入序列
+   - Position Embeddings with shape (1, n, 768) : 让 BERT 知道它所输入的输入具有时间属性
+   - 这些表示在元素方面相加，以产生具有相同形状(1, n, 768)的单个表示
+   - 这些是传入到 BERT 的Encoder layer
