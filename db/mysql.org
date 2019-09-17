@@ -1,0 +1,28 @@
+* Mysql On Docker
+** Install & Configure
+  #+begin_src sh
+    docker pull mysql:5.7
+    docker run -it --rm --name mysql5.7 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:5.7
+    docker exec -it mysql5.7 bash
+    mysql -uroot -p123456
+    select user,host,authentication_string from mysql.user;
+    grant all PRIVILEGES on *.* to root@'%' WITH GRANT OPTION;
+  #+end_src
+** Configure UTF-8 Charset
+   #+begin_src shell
+     # 解决外部访问数据乱码的问题
+     SET NAMES 'utf8'; 
+     # 或者修改配置文件
+     /etc/mysql/mysql.conf.d/mysql.cnf
+     [mysqld]增加
+     default-character-set = utf8
+     character_set_server = utf8
+     [mysql]
+     default-character-set = utf8
+     [mysql.server]
+     default-character-set = utf8
+     [mysqld_safa]
+     default-character-set = utf8
+     [client]
+     default-character-set = utf8
+   #+end_src
