@@ -1,0 +1,34 @@
+* Docker GitLab服务器搭建
+** Install
+   #+begin_src sh
+     sudo docker pull gitlab/gitlab-ce:latest
+   #+end_src
+** Start Server
+   #+begin_src sh
+     docker run --detach --hostname gitlab.examples.com --publish 8443:443 --publish 8081:8081 --publish 8022:22 --name gitlab --restart always --volume /srv/gitlab/config:/etc/gitlab --volume /srv/gitlab/logs:/var/log/gitlab --volume /srv/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce:latest
+   #+end_src
+   - detach:
+   - hostname: 配置GitLab服务器域名
+   - publish: 映射端口
+   - name : 容器名
+   - restart: always,系统启动则GitLab启动
+   - volume: 挂载目录
+** Configure
+   #+begin_src sh
+     sudo docker exec -it gitlab /bin/bash
+     vim /etc/gitlab/gitlab.rb
+
+     external_url "http://gitlab.cmi.com:8081"
+     gitlab-ctl reconfigure
+   #+end_src
+** 配置hosts文件
+   配置搭建服务器主机的IP和我们配置的GitLab域名
+   
+** Web访问
+   http:gitlab.examples.com:8081
+   - 注册用户
+   - 建立Group
+   - 建立Project
+   
+** SSH
+   配置公钥
