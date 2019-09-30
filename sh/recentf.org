@@ -1,0 +1,7 @@
+* 常用 Shell 脚本记录
+** Mac
+*** 拷贝数量很多的文件
+    - find ./00080101 -name \*.txt | xargs -I{} cp {} ./temp
+** Ubuntu
+*** 拷贝数量很多的文件
+    - find ./00080101 -name \*.txt | xargs -i cp {} ./temp
