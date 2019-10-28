@@ -1,0 +1,21 @@
+* Tencent Embedding
+  
+** 一次读入并获取词向量
+   #+begin_src python
+     with open(tencent_embedding_file_path, 'r') as f:
+       for line in f.readlines():
+         line = line.strip().split(' ')
+         token = line[0]
+         vector = [float(num) for num in line[:1]]
+         print(token, vector) 
+   #+end_src
+
+** 一次读一行并获取词向量
+   #+begin_src python
+     with open(tencent_embedding_file_path, 'r') as f:
+       for line in f:
+         line = line.strip().split(' ')
+         token = line[0]
+         vector = [float(num) for num in line[:1]]
+         print(token, vector) 
+   #+end_src
