@@ -1,0 +1,20 @@
+* Python 遇到的各种安装问题和库问题
+  - OS: MacOS
+  - Pyenv
+ 
+** Tkinter 问题 和 Matplotlib 问题
+   Steps:
+   1. 安装 tcl-tk 包并设置环境变量
+   #+begin_src sh
+     brew install tcl-tk
+     export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
+     export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
+     export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"
+     export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"
+     export PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig"
+   #+end_src
+   2. Matplotlib 问题
+   #+begin_src sh
+     env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install 3.6.6
+   #+end_src
+** Bazel 编译 TensorFlow
