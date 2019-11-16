@@ -4,8 +4,17 @@
 
 ** 环境搭建
    - Git Clone GoogleTest Repo
-   - Build(cd /path/to/googletest && mkdir build && cd build && cmake .. && cmake --build .)
+   - Build
+     #+begin_src sh
+       cd /path/to/googletest && mkdir build && cd build && cmake .. && cmake --build .)
+     #+end_src
    - Install(make install)
 ** 使用 CMake 构建测试用例(CMake 引入头文件和编译好的库文件)
-   - include 目录:include_directories(/usr/local/include /usr/local/include)
-   - 连接动态库目录:link_directories(/usr/local/lib /usr/local/lib)
+   - include 目录:
+     #+begin_src cmake
+       include_directories(/usr/local/include /usr/local/include)
+     #+end_src
+   - 连接动态库目录:
+     #+begin_src cmake
+       link_directories(/usr/local/lib /usr/local/lib)
+     #+end_src
