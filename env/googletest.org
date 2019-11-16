@@ -6,7 +6,7 @@
    - Git Clone GoogleTest Repo
    - Build
      #+begin_src sh
-       cd /path/to/googletest && mkdir build && cd build && cmake .. && cmake --build .)
+       cd /path/to/googletest && mkdir build && cd build && cmake .. && cmake --build .
      #+end_src
    - Install(make install)
 ** 使用 CMake 构建测试用例(CMake 引入头文件和编译好的库文件)
