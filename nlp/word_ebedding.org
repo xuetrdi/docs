@@ -1,0 +1,9 @@
+* Word Embedding
+  
+** 理解思路
+   A B C 和 A D C: 可以理解为 B, D 处在相同的环境下，所以推断 B,D 可能具有很大的相似度
+   比如有 1000 个 token，那么 one-hot 的表示就是[1000, 1000]
+   设置一个 embedding 矩阵来实现降维转移[1000, 50],每个 token 就是一个 50 维度的向量
+   [vocab_size, vocab_size] .* [vocab_size, embedding_size] = [vocab_size, embedding_size]
+   如果拿到一个一个 50 维度的向量
+   [embedding_size] * [embedding_size, vocab_size] = [1, vocab_size] 得到概率分布
