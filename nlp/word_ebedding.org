@@ -7,3 +7,10 @@
    [vocab_size, vocab_size] .* [vocab_size, embedding_size] = [vocab_size, embedding_size]
    如果拿到一个一个 50 维度的向量
    [embedding_size] * [embedding_size, vocab_size] = [1, vocab_size] 得到概率分布
+
+** Word2Vec
+   是一个CBOW或者skip gram。
+   可以理解为一个两层的神经网络，它将文本语料库作为输入并返回一个向量。
+   不能被认为是深度神经网络，但是它能够将文本转换为深度网络可以理解的数字形式。
+   是一组用于生成单词嵌入的相关模型。
+   这些模型是浅的两层神经网络，经过训练可以重建单词的语言环境。
