@@ -1,0 +1,2 @@
+* Swf Convert To MP4
+  ffmpeg -i 2.swf -c:v libx264 -c:a libvo_aacenc -ac 2 2.mp4
