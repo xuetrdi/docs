@@ -1,0 +1,7 @@
+* TensorFlow相关笔记
+  TensorFlow实践笔记
+  
+** 主要内容
+   1. [[./deploying_tensorflow2.1_as_C_api_executable_On_CPU.org][使用C API部署TensorFlow Saved Model模型]]
+   2. [[./tf2-checkpoint.org][TF2.0保存模型方法]]
+   3. [[./tf-cpp.org][TensorFlow CPP构建方法]]
