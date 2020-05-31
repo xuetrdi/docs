@@ -1,0 +1,38 @@
+* TensorFlow 2.0 模型保存和恢复
+  
+** Checkpoint
+   tf.train.Checkpoint对象接收关键字参数，可以接收的对象如下:
+     - tf.keras.optimizers.Optimizer的实现
+     - tf.Variable
+     - tf.keras.Layer实现
+     - tf.keras.Model实现
+   将使用checkpoint保存这些值，并维护一个save_counter来为checkpoint编号
+   checkpoint.save和checkpoint.restore是基于对象读写checkpoint
+   TF1.x的tf.compat.v1.train.Saver是基于variable.name读写checkpoint
+   基于对象的检查点保存带有named edges的Python对象(Layer,Optimizer,Variable)之间的依赖关系图,该graph用于在于恢复checkpoint时匹配变量
+   对于Python程序中更健壮，并有助于支持变量的创建时恢复
+   
+   Checkpoint对象对作为关键字参数传递给其构造函数的对象有依赖性，并且为每个依赖性赋予一个`name`,该名称与其创建关键字参数名字相同
+   用户自定义的类继承自tf.keras.Model使得管理依赖变得容易，因为Model挂接到属性分配上
+   tf.keras.Model.save_weights(): 将不匹配Model变量
+   与tf.keras.Model.save_weights()相比tf.train.Checkpoint()更适合用于训练检查点
+   
+   恢复训练检查点
+   恢复此检查点及其依赖的任何对象
+   如果已经创建variables to restore则立即分配值，或者推迟还原直到创建变量为止。
+   为确保加载完成且不会再进行其他分配，请使用restore返回的`状态对象`的assert_consumed()方法
+   当没有最新checkpoint for tf.train.latest_checkpoint()返回None
+   否则返回一个对象,该对象可以依赖关系图中的对象初始化   
+   save_counter更新tf.train.latest()元数据
+   save()会为checkpoint编号更新编号,write()不会为checkpoint编号
+
+** CheckpointManager
+   - checkpoint: 用于管理和保存检查点的tf.train.Checkpoint实例对象
+   - directory: 写入checkpoint的路径，有一个checkpoint的文件包含CheckpointManager的状态
+   - max_to_keep: 要保留的检查点的数目
+   - keep_checkpoint_every_n_hours=None
+   - checkpoint_name='ckpt': 检查点的名字
+   
+   - 如果目录中有检查点对象则，则被恢复
+
+   - save(): 创建一个新的checkpoint并manager
