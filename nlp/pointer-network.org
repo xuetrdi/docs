@@ -1,0 +1,37 @@
+* Pointer Networks for Deep Learning
+  
+** Link
+   https://towardsdatascience.com/understanding-pointer-networks-81fbbc1ddbc8
+  
+** Attention
+   In attention based sequential models, a context vector if formed at every time step of the decoder by giving weights to the input tokens.
+   在基于注意力的顺序模型中，上下文向量是在解码器的每一个时间步通过赋予输入权重而形成的。
+   This context vector is calculated by multiplying attention weights to hidden state representations of each input tokens and summing them up.
+   通过将注意力权重乘以每个输入的隐藏状态并将其求和来计算此上线文向量。
+   有几种计算注意力的方法：
+   - dot product
+   - scaled dot product
+   But it does not apply to problems where the output dictionary size depends on the input.
+   在大多数的顺序模型上，注意力模型的性能明显优于普通的顺序模型。但这不适用于输出的字典依赖于输入的问题
+
+** Pointer Networks
+   In each decoder time-step, the generating network produces a vector that modulates content-based attention weights over inputs.
+   在每个解码器时间步中，生成网络都会生成一个向量，该向量对输入中基于内容的注意力权重进行调制。
+   这些权重通过softmax运算来计算的，该运算的字典大小等于输入序列的长度。
+   In the pointer network, these attention weights/masks are not further used to calculate the content vector for the next time step
+   Input time-step having the highest weights is considered as output for that decoder time-step.
+   在指针网络中，这些注意力权重/掩码不再进一步用于计算下一个时间步的上下文向量，这些权重被认为是输入序列的指针。
+   具有最高权重的输入时间步被视为该解码器时间步长做输出。
+
+** Summary
+   It should be understood that a simple RNN sequence-to-sequence model could have solved this by training to point at the input targets indexes directly.
+   However, at inference, this solution does not respect the constraint that the outputs map back to the input indeces exactly.
+   Without the restrictions, the predictions are bound to become blurry over more extended sequences.
+   应该理解，一个简单的RNN序列到序列的模型可以通过训练直接指向输入目标索引来解决。然而，据此推论，该解决方案没有遵守输出精确映射回输入索引的约束。
+   没有限制，预测必然会在更多扩展序列上变得模糊
+
+** Applications of Pointer Networks
+   - Text Summarization
+   - Convex hull Problem: 凸包问题
+   - Delaunay Triangulation: 德劳内三角剖析
+   - Travelling Salesman Problem(TSP): 旅行商问题
