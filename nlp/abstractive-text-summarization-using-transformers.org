@@ -1,0 +1,86 @@
+* Building an Abstractive Text Summarizer for generation news article headlines
+  - 简单介绍Abstractive Summarization
+  - 数据集
+  - 预处理
+  - 实用功能
+  - 模型
+  - 训练模型
+  - 推断
+  - 总结
+
+** A Brief Introduction to Abstractive
+   Summarization is the ability to explain a large piece of literature in short and covering most of the context addresses
+   Summarization是指能够简要解释大量文献并涵盖上下文所涉及的大部分含义的能力。
+   大致分两类：
+   - Extractive Summarization
+   - Abstractive Summarization
+
+*** Extractive Summarization
+    Extractive Summarization essentially involves extracting particular piece of text(usually sentences) based on predefined weights assigned to the important words where the selection of the text
+    depends on the weights of the words in it.
+    摘录摘要基本上涉及根据分配给重要单词的预定义权重来提取特定文本片段(通常是句子),其中文本的选择取决于其中单词的权重
+    Usually, the default weights are assigned according to the frequency of occurrence of a word.
+    默认权重是根据单词出现的频率分配的。
+    the length of the summary can be manipulated by defining the maximum and minimum number of sentences to be included in the summary.
+    摘要的长度可以通过定义摘要中包含的句子的最大和最小数目来控制。
+
+*** Abstractive Summarization
+    Abstractive Summarization includes heuristic approaches to train the system in making an attempt to understand the whole context and generate a summary based on that understanding.
+    鉴于抽象摘要包括启发式方法，可训练系统尝试理解整个上下文并基于该理解生成摘要。
+    This is more human-like way of generating summaries and these summaries are more effective as compared to the extractive approaches
+    这是一种更像人类的方式来生成摘要，并且与提取方法相比，这些摘要更为有效。
+
+** Dataset
+   Inshorts数据集是一种从各种来源手机新闻并将其发布为摘要的服务
+   - 55k个新闻标题样本
+   - 76k个唯一单词
+   - headlines中有29k个单词
+   - 新闻最长序列的样本由469个单词组成
+   - 平均新闻长度为368个单词
+   - 标题的平均长度分别为96个和63个单词
+
+** Preprocessing
+   - 为了识别目标序列的开头和结尾，用<go>标记开始，用<stop>标记结束。||summary = summary.apply(lambda x: '<go> ' + x + ' <stop>')||
+   - 过滤标点符号
+   - 转换小写
+   - 维护词汇字典，该字典按单词出现的频率排序，并包含单词及其标记等价物的映射
+   - 将文本转换可以输入到模型的tokens
+   - padding
+   - shuffle
+   - batch
+
+** Utility Functions -- Transformer
+
+*** Positional Encodings
+    - 负责获取输入序列的位置编码
+    - 位置编码基本上在输入单词中引入了排序的概念，因为在Transformer中使用的Self-Attention对此无视
+*** Masking
+    - Padding mask: 负责忽略添加到比maxlen短的序列中的外部填充
+    - Look-ahead mask: 负责忽略目标序列中给定当前单词之后出现的单词对当前单词的预测贡献
+
+** The Model
+   
+*** Scaled Dot-Product
+    模型中注意力计算的基础
+*** Point-wise Feed-Forward Network
+    常规的两层前馈网络，几乎在每个子层之后使用并且使用相同
+*** Multi-Head Attention 
+    输入为多个头部，使用缩放点积注意力计算注意力权重，最后所有头部合并输出
+*** The Encoder and Decoder Blocks
+    这些分别是编码器和解码器的基本单元，在调整模型时，可以将它们扩展到Nx个编码器/解码器层
+    这些Multi-Head Attention layers, Residual Drop connections, linear transformation layers组成。
+*** The Actual Encoder and Decoder
+    该层负责直接与输入和输出交互，在此，获得输入的嵌入，并将这些嵌入添加到位置编码中。
+*** Stacking the Layers in the 'Model'
+    最后，将所有中间层堆叠在从tf.keras.Model类继承的Custom Model类中
+*** Custom Learning Rate
+    建议对自定义学习率调度程序进行训练，以帮助快速收敛
+
+** Trainning the Model
+
+
+** Inference 
+   
+
+** Github Repo
+   https://github.com/rojagtap/abstractive_summarizer
