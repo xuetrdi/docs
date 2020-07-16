@@ -1,0 +1,43 @@
+* BERT for relation extraction and semantic role labelling
+  
+** BERT for relation extraction
+   - Add special tokens to the input sentence([CLS] and [SEP]) and mask entity mentions with mask tokens to prevent overfitting. There are two argument type(subject and object) and two entity type(location and person).
+   - 在输入句子中添加特殊标记([CLS]和[SEP])，并使用掩码标记来掩盖实体以及防止过拟合。有两种参数类型(主体和客体)和两种实体类型(位置和人)
+   - Tokenisation using WordPiece tokeniser and feed into BERT encoder to obtain the contextualised representation
+   - 使用WordPiece标记器进行标记化，并将输入BERT编码器以获取上下文表示
+   - Remove any sequence after the first [SEP] token
+   - 删除第一个[SEP]token后的所有序列
+   - Compute the position sequence relative to the subject entity and object entity
+   - 计算相对于主体和客体的位置序列
+   - Convert both position sequence into position embeddings and concatenate it to the contextualised representation
+   - 将两个位置序列都转换为位置嵌入，并将其连接到上下文表示
+   - Feed it through a one-layer BiLSTM
+   - 通过一层BiLSTM
+   - The final hidden states in both directions are fed into a multi-layer(one hidden layer) perceptron
+   - 两个方向上的最终隐藏状态被馈送到多层(一个隐藏层)感知器中
+
+** BERT for Semantic Role Labelling
+   
+*** 语义角色标签包括四个子任务
+    - Predicate detection(谓词检测)
+    - Predicate sense disambiguation(谓词语义消除)
+    - Argument identification(参数识别)
+    - Argument classification(参数分类)
+
+*** Predicate sense disambiguation
+    目的是在上下文中正确标记谓词的含义。
+    - Tokenisation using WordPiece tokeniser
+    - 使用WordPiece标记器进行标记化
+    - The predicate word (or token) is tagged with the appropriate label
+    - 谓词(或标记)用适当的标签 标记
+    - The rest of the other words are tagged with either 'O' or 'X'. 'O' for the first token of any word and 'X' for fragments of remaining of the word
+    - 其余的其它单词都标有'O'或'X'，'O'表示任何单词的第一个标记,'X'表示剩余单词的片段
+    - Feed the sequence into the BERT encoder to obtain contextualised representation
+    - 将序列输入BERT编码器以获得上下文表示
+    - Concatenate a predicate indicator embeddings to the contextualised embeddings to let the models know which tokens are predicate tokens
+    - 将嵌入到上下文嵌入中的谓词指示符连接起来，以使模型知道哪些标记是谓词标记
+    - Feed the concatenated embeddings and the label set into the MLP for the final prediction
+    - 将串联的嵌入和标签集输入到MLP中以进行最终预测
+
+*** Argument identification and classification
+    此处的目标是识别参数范围或语法头，并将它们映射到正确的语义角色标签，我们的输入是一个句子-谓词对，我们需要预测一个序列，其中BIO标记方案和谓词自变量之间标签集重叠。
