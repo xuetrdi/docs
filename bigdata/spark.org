@@ -1,0 +1,14 @@
+* Spark学习笔记
+
+** 问题[/]
+   - [ ] Spark如何启动集群，然后向集群提交程序运行
+
+** 常用功能[0/2]
+   - [ ] 读文件写文件
+   - [ ] reduceByKey
+
+** 常用算子
+   - map
+   - reduce
+   - filter
+   - groupByKey

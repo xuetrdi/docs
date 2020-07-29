@@ -1,0 +1,15 @@
+* Spark环境搭建
+  - 安装JDK
+  - 安装Scala
+  - 下载Spark
+  - Spark配置
+  - Spark开发环境配置
+
+** Spark运行配置
+   - conf/spark-env.sh
+   - conf/spark-defaults.conf
+   - SPARK_LOCAL_IP
+
+** IDED配置Spark运行环境
+   - 创建Scala项目
+   - File -> Project Structure -> Libraries -> 增加SPARK_HOME/jars/*.jar包
