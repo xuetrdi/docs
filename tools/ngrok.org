@@ -1,0 +1,128 @@
+* Ngrok内网穿墙-在公网访问家里的电脑
+  
+** 准备工作
+   - 域名: 比如ngrok.xxx.com
+   - 编译器: Golang编译器
+*** 域名准备
+    - 可以用一个真实的域名
+    - 或者修改hosts文件映射(客户端)，具体没试过，从别人的教程中揣摩的
+
+*** 安装环境
+   #+BEGIN_SRC sh
+     sudo sudo apt-get install build-essential golang mercurial git 
+   #+END_SRC
+
+** 步骤
+   - 获取源代码
+   - 创建证书
+   - 修改代码
+   - 编译项目
+   - 配置服务器
+   - 配置客户端
+   - 连接内网服务器
+
+*** 获取源代码
+    #+begin_src sh
+      git clone https://github.com/inconshreveable/ngrok.git
+    #+end_src
+
+*** 创建证书
+    #+begin_src sh
+      cd && openssl rand -writerand .rnd
+      cd ngrok
+      NGROK_DOMAIN="ngrok.xxx.com"
+      openssl genrsa -out base.key 2048
+      openssl req -new -x509 -nodes -key base.key -days 10000 -subj "/CN=$NGROK_DOMAIN" -out base.pem
+      openssl genrsa -out server.key 2048
+      openssl req -new -key server.key -subj "/CN=$NGROK_DOMAIN" -out server.csr
+      openssl x509 -req -in server.csr -CA base.pem -CAkey base.key -CAcreateserial -days 10000 -out server.crt
+
+      cp server.key assets/server/tls/snakeoil.key
+      cp server.crt assets/server/tls/snakeoil.crt
+      cp base.pem assets/client/tls/ngrokroot.crt
+    #+end_src
+
+*** 修改代码
+    ngrok默认监控IPv6端口，我们通过IPv4方式穿透，所以需要修改协议为改tcp为tcp4，分别为：
+    src/ngrok/server/tunnel.go的109行net.ListenTCP后面的"tcp"改成"tcp4",
+    src/ngrok/conn/conn.go的57行的net.Listen后的"tcp"同样改成"tcp4"
+
+*** 编译代码
+    如果服务端和客户端用的是同样的操作系统，可以一块编码，如果不同的系统，则分开编译，分别执行不同的硬件架构通过GOARCH环境变量
+    #+begin_src sh
+      make release-server release-client 
+    #+end_src
+    编译完，ngrokd为服务端可执行程序，ngrok为客户端可执行程序，将ngrokd拷贝到服务端，将ngrok拷贝到客户端。
+
+*** 配置服务端
+    #+begin_src sh
+      sudo mkdir /opt/ngrokd && sudo cp ngrokd /opt/ngrokd 
+    #+end_src
+    配置开机自启动
+    #+begin_src sh
+      sudo vi /lib/systemd/system/ngrokd.service
+    #+end_src
+    #+begin_src sh
+      [Unit]
+      Description=ngrok server
+      After=network.target
+
+      [Service]
+      Type=simple
+      ExecStart=/opt/ngrokd/ngrokd -domain ngrok.xxx.com -httpAddr "" -httpsAddr "" -tunnelAddr ":4443" -log "/var/log/ngrokd.log"
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target 
+    #+end_src
+    要记得这里配置的端口4443，因为客户端连接的时候需要这个端口
+    #+begin_src sh
+      sudo systemctl enable ngrokd 
+      sudo systemctl start ngrokd 
+    #+end_src
+*** 配置客户端
+    拷贝ngrok服务
+    #+begin_src sh
+      sudo mkdir /opt/ngrok
+      sudo cp ngrok /opt/ngrok/ 
+    #+end_src
+    编辑客户端的配置文件，这里的4443即为服务端的监听端口
+    #+begin_src yml
+      server_addr: example.com:4443
+      trust_host_root_certs: false
+      tunnels:
+        transmission:
+          remote_port: 9091
+          proto:
+            tcp: 9091
+        ssh:
+          remote_port: 23333
+          proto:
+            tcp: 22 
+    #+end_src
+    配置开机自启动
+    #+begin_src sh
+      sudo vi /lib/systemd/system/ngrok.service 
+    #+end_src
+    #+begin_src sh
+      [Unit]
+      Description=ngrok client
+      After=network.target
+
+      [Service]
+      Type=simple
+      ExecStart=/opt/ngrok/ngrok -config "/opt/ngrok/ngrok.yml" -log "/var/log/ngrok.log" start transmission ssh
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target 
+    #+end_src
+    #+begin_src sh
+      sudo systemctl enable ngrok
+      sudo systemctl start ngrok 
+    #+end_src
+
+*** 连接内网服务器
+    #+begin_src sh
+      ssh -p 23333 内网服务器用户名@ngrok.xxx.com 
+    #+end_src
