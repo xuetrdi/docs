@@ -1,0 +1,15 @@
+* FFmpeg
+
+** 源码编译FFmpeg
+   #+begin_src sh
+     ./configure --prefix=/usr/local/ffmpeg --enable-debug=3 --enable-shared --disable-static
+     make -j4 && make install
+   #+end_src
+   注意：如果以前编译过，重新拉取代码再编译可能出错，清除以前的生成文件`make distclean`，然后再重新运行上面命令
+
+
+** Xcode中配置FFmpeg
+   配置动态库和头文件
+   - 点击TARGET中应用名
+   - General --> Frameworks,Libraries,and Embedded Countent点击`+` --> 添加ffmpeg的动态库
+   - Build Settings --> Search Paths --> User Header Search Paths --> 添加ffmpeg的头文件
