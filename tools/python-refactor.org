@@ -1,0 +1,33 @@
+* Ropemacs On Spacemacs
+  
+** Install Dependent
+   #+begin_src sh
+     git clone https://github.com/python-rope/rope.git 
+     git clone https://github.com/dgentry/Pymacs.git && cd Pymacs && make && python setup.py install
+     git clone https://github.com/python-rope/ropemacs.git
+   #+end_src  
+
+ 
+** Configuration
+   #+begin_src sh
+   mkdir ~/.emacs.d/private/lisp && cp /path/to/Pymacs/pymacs.el ~/.emacs.d/private/lisp
+   #+end_src
+   增加这部分配置函数到 dotspacemacs-user-config()中
+   #+begin_src elisp
+     (add-to-list 'load-path "~/.emacs.d/private/lisp")
+     (defun load-ropemacs ()
+       "Load pymacs and ropemacs"
+       (interactive)
+       (setenv "PYMACS_PYTHON" "python3.6")
+       (require 'pymacs)
+       (autoload 'pymacs-load "pymacs" nil t)
+       (autoload 'pymacs-eval "pymacs" nil t)
+       (autoload 'pymacs-apply "pymacs")
+       (autoload 'pymacs-call "pymacs")
+       (autoload 'pymacs-exec "pymacs" nil t)
+       (pymacs-load "ropemacs" "rope-")
+       (global-set-key [(meta ?/)] 'rope-code-assist)
+       (setq rope-confirm-saving 'nil)
+     ) 
+     (add-hook 'python-mode-hook 'load-ropemacs)
+   #+end_src
