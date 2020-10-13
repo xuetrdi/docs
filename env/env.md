@@ -15,9 +15,10 @@
 3. Python 安装配置
 
 ```shell
-sudo wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
-tar -xf Python-3.6.3.tgz
-cd Python-3.6.3
+PYTHON_VERSION=3.8.2
+sudo wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-{PYTHON_VERSION}.tgz
+tar -xf Python-${PYTHON_VERSION}.tgz
+cd Python-${PYTHON_VERSION}
 sudo ./configure --with-ssl --prefix=/usr/local/python3
 sudo make
 sudo make install
