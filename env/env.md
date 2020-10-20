@@ -15,13 +15,19 @@
 3. Python 安装配置
 
 ```shell
-PYTHON_VERSION=3.8.2
-sudo wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-{PYTHON_VERSION}.tgz
+PYTHON_VERSION=3.8.5
+sudo wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz
 tar -xf Python-${PYTHON_VERSION}.tgz
 cd Python-${PYTHON_VERSION}
+
+# Linux
 sudo ./configure --with-ssl --prefix=/usr/local/python3
 sudo make
 sudo make install
+
+# Mac
+./configure --enable-optimizations --prefix=/usr/local/python --with-openssl=/usr/local/opt/openssl  --with-tcltk-includes='-I/usr/local/opt/tcl-tk/include' --with-tcltk-libs='-L/usr/local/opt/tcl-tk/lib'
+make && make install
 ```
 
 [注意]编译安装过程依赖包zlib，负责不会成功.报INFO的需要tcl-dev，tk-dev，tcl,tk但是不影响编译安装成功
